@@ -18,4 +18,8 @@
         </activity>
     </application>
 
+    <!-- DB 조회를 위한 퍼미션 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
 </manifest>
