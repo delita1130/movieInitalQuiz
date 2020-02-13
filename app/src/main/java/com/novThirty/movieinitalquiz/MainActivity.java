@@ -24,13 +24,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_quiz_main);
 
         //dbConnectTest();
     }
 
     // ------ database 관련 함수를 다른 class 로 이동 계획 중.. ----------------
-
     public void dbConnectTest(){
         createDatabase();
 
