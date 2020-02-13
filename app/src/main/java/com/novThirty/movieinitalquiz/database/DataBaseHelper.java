@@ -1,4 +1,4 @@
-package com.novThirty.movieinitalquiz;
+package com.novThirty.movieinitalquiz.database;
 
 import android.content.Context;
 import android.database.SQLException;
