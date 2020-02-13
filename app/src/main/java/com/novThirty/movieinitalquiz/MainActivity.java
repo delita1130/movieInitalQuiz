@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         createDatabase();
 
-        //insertRecord();
+        // insertMovie("영화1", "1", );
         movieList = getMovieList();
 
         Log.e(TAG, movieList.get(0).getMovActor());
