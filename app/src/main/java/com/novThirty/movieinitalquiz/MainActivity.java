@@ -24,27 +24,33 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.e(TAG, "시작");
         setContentView(R.layout.activity_main);
-        createDatabase();
 
-        // insertMovie("영화1", "1", );
-        movieList = getMovieList();
-
-        Log.e(TAG, movieList.get(0).getMovActor());
+        //dbConnectTest();
     }
 
+    // ------ database 관련 함수를 다른 class 로 이동 계획 중.. ----------------
 
-    // database 관련 함수를 다른 class 로 이동 계획 중..
+    public void dbConnectTest(){
+        createDatabase();
+
+        movieList = getMovieList();
+        Log.e(TAG, movieList.get(0).getMovActor());
+
+        // insertMovie("영화1", "1", );
+    }
+
     private void createDatabase() {
         dbHelper = new DataBaseHelper(this);
         database = dbHelper.getWritableDatabase();
     }
 
+    // 스테이지 개수
     public int getCountStage(){
         return 0;
     }
 
+    // db Test
     public List<Movie> getMovieList(){
         List<Movie> list = null;
 
@@ -81,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
         return list;
     }
 
+    // db Test
     public void insertMovie(String movName, String stage, String step, String movScript, String movActor, String movImgPath) {
         if (database != null) {
             database.execSQL("insert into xb_movie(" +
