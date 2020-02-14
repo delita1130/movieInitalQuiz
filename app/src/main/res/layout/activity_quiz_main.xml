@@ -85,7 +85,10 @@
             android:layout_marginRight="5dp"
             android:layout_marginBottom="5dp"
             android:layout_weight="1"
-            android:text="TextView" />
+            android:background="@drawable/edge"
+            android:gravity="center_vertical"
+            android:text="TextView"
+            android:textAlignment="center" />
 
         <TextView
             android:id="@+id/textView7"
@@ -96,7 +99,10 @@
             android:layout_marginEnd="5dp"
             android:layout_marginBottom="5dp"
             android:layout_weight="1"
-            android:text="TextView" />
+            android:background="@drawable/edge"
+            android:gravity="center_vertical"
+            android:text="TextView"
+            android:textAlignment="center" />
 
         <TextView
             android:id="@+id/textView8"
@@ -107,7 +113,10 @@
             android:layout_marginEnd="5dp"
             android:layout_marginBottom="5dp"
             android:layout_weight="1"
-            android:text="TextView" />
+            android:background="@drawable/edge"
+            android:gravity="center_vertical"
+            android:text="TextView"
+            android:textAlignment="center" />
 
         <TextView
             android:id="@+id/textView9"
@@ -118,7 +127,10 @@
             android:layout_marginEnd="5dp"
             android:layout_marginBottom="5dp"
             android:layout_weight="1"
-            android:text="TextView" />
+            android:background="@drawable/edge"
+            android:gravity="center_vertical"
+            android:text="TextView"
+            android:textAlignment="center" />
 
         <TextView
             android:id="@+id/textView10"
@@ -129,7 +141,10 @@
             android:layout_marginEnd="5dp"
             android:layout_marginBottom="5dp"
             android:layout_weight="1"
-            android:text="TextView" />
+            android:background="@drawable/edge"
+            android:gravity="center_vertical"
+            android:text="TextView"
+            android:textAlignment="center" />
     </LinearLayout>
 
     <LinearLayout
@@ -177,6 +192,8 @@
                 android:layout_height="match_parent"
                 android:layout_marginRight="10dp"
                 android:layout_weight="0.25"
+                android:background="@drawable/edge"
+                android:gravity="center_vertical"
                 android:text="명대사 힌트"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -187,7 +204,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="우린답을 찾을꺼야! 늘 그랬듯이~" />
+                android:background="@drawable/edge"
+                android:gravity="center_vertical"
+                android:text="우린답을 찾을꺼야! 늘 그랬듯이~"
+                android:textAlignment="center" />
         </LinearLayout>
 
         <LinearLayout
@@ -202,6 +222,8 @@
                 android:layout_height="match_parent"
                 android:layout_marginRight="10dp"
                 android:layout_weight="0.25"
+                android:background="@drawable/edge"
+                android:gravity="center_vertical"
                 android:text="출연자 힌트"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -212,7 +234,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/edge"
+                android:gravity="center_vertical"
                 android:text="크리스토퍼 놀란, 메튜 매커너히, 엔 해서웨이"
+                android:textAlignment="center"
                 android:textSize="10sp" />
         </LinearLayout>
 
@@ -228,6 +253,8 @@
                 android:layout_height="match_parent"
                 android:layout_marginRight="10dp"
                 android:layout_weight="0.25"
+                android:background="@drawable/edge"
+                android:gravity="center_vertical"
                 android:text="사진 힌트"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -238,7 +265,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/edge"
+                android:gravity="center_vertical"
                 android:text="사진 힌트"
+                android:textAlignment="center"
                 android:textSize="10sp" />
         </LinearLayout>
 
@@ -254,6 +284,8 @@
                 android:layout_height="match_parent"
                 android:layout_marginRight="10dp"
                 android:layout_weight="0.25"
+                android:background="@drawable/edge"
+                android:gravity="center_vertical"
                 android:text=" 정 답"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -264,6 +296,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/edge"
                 app:srcCompat="@drawable/lock" />
         </LinearLayout>
     </LinearLayout>

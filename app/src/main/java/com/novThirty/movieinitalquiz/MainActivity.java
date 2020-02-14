@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_quiz_stage);
+        setContentView(R.layout.activity_quiz_main);
         Intent intent = new Intent(this, LoadingActivity.class);
         startActivity(intent);
         //dbConnectTest();
