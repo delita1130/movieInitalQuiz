@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     SQLiteDatabase database;
     String TAG = "MainActivity";
     List<Movie> movieList;
-
+//
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
