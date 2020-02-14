@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
                     "user_code," +
                     "done_mov_num," +
                     "curr_mov_num," +
-                    "point" +
+                    "point)" +
                     "values (userCode, doneMovNum, currMovNum, point)");
         }
     }
