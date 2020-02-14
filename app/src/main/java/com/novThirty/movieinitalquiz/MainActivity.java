@@ -99,4 +99,15 @@ public class MainActivity extends AppCompatActivity {
                             "values (movName, stage, step, movScript, movActoer, movImgPath)");
         }
     }
+
+    public void insertUser(String userCode, int doneMovNum, int currMovNum, int point){
+        if (database != null) {
+            database.execSQL("insert into xb_user(" +
+                    "user_code," +
+                    "done_mov_num," +
+                    "curr_mov_num," +
+                    "point" +
+                    "values (userCode, doneMovNum, currMovNum, point)");
+        }
+    }
 }
