@@ -19,6 +19,12 @@ public class Movie {
         this.movImgPath = movImgPath;
     }
 
+    public Movie(int movNum, String movName, String stage){
+        this.movNum = movNum;
+        this.movName = movName;
+        this.stage = stage;
+    }
+
     public int getMovNum() {
         return movNum;
     }

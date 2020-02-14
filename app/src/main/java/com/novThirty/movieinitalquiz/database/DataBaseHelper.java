@@ -43,23 +43,20 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public void createDataBase() throws IOException
-    {
+    public void createDataBase() throws IOException {
 
         //데이터베이스가 없으면 asset폴더에서 복사해온다.
         boolean mDataBaseExist = checkDataBase();
 
-        if(!mDataBaseExist)
-        {
+        if(!mDataBaseExist) {
             this.getReadableDatabase();
             this.close();
             try {
                 //Copy the database from assests
                 copyDataBase();
-                Log.e(TAG, "11111createDatabase database created");
+                Log.e(TAG, "createDatabase database created");
             }
-            catch (IOException mIOException)
-            {
+            catch (IOException mIOException) {
                 throw new Error("ErrorCopyingDataBase");
             }
         }else{
