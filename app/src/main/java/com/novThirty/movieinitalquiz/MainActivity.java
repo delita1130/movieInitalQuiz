@@ -2,6 +2,7 @@ package com.novThirty.movieinitalquiz;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -24,8 +25,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_quiz_main);
-
+        setContentView(R.layout.activity_quiz_stage);
+        Intent intent = new Intent(this, LoadingActivity.class);
+        startActivity(intent);
         //dbConnectTest();
     }
 
