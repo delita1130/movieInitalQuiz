@@ -24,13 +24,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_quiz_main);
 
         //dbConnectTest();
     }
 
     // ------ database 관련 함수를 다른 class 로 이동 계획 중.. ----------------
-
     public void dbConnectTest(){
         createDatabase();
 
@@ -98,6 +97,17 @@ public class MainActivity extends AppCompatActivity {
                                 "mov_actor," +
                                 "mov_img_path)" +
                             "values (movName, stage, step, movScript, movActoer, movImgPath)");
+        }
+    }
+
+    public void insertUser(String userCode, int doneMovNum, int currMovNum, int point){
+        if (database != null) {
+            database.execSQL("insert into xb_user(" +
+                    "user_code," +
+                    "done_mov_num," +
+                    "curr_mov_num," +
+                    "point)" +
+                    "values (userCode, doneMovNum, currMovNum, point)");
         }
     }
 }
