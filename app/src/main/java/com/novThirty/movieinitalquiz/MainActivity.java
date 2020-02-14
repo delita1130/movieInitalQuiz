@@ -3,6 +3,7 @@ package com.novThirty.movieinitalquiz;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -30,7 +31,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz_main);
-        dbConnectTest();
+        Intent intent = new Intent(this, LoadingActivity.class);
+        startActivity(intent);
+        dbConnect();
 
     }
 
@@ -83,13 +86,13 @@ public class MainActivity extends AppCompatActivity {
 
         if (database != null) {
             String sql = "select     mov_num, " +
-                                    "mov_name, " +
-                                    "stage, " +
-                                    "step, " +
-                                    "mov_script, " +
-                                    "mov_actor, " +
-                                    "mov_img_path" +
-                        " from      xb_movie ";
+                    "mov_name, " +
+                    "stage, " +
+                    "step, " +
+                    "mov_script, " +
+                    "mov_actor, " +
+                    "mov_img_path" +
+                    " from      xb_movie ";
 
             try {
                 Cursor cursor = database.rawQuery(sql, null);
@@ -118,22 +121,22 @@ public class MainActivity extends AppCompatActivity {
     public void insertMovie(String movName, String stage, String step, String movScript, String movActor, String movImgPath) {
         if (database != null) {
             database.execSQL("insert into xb_movie( mov_name," +
-                                                    "stage," +
-                                                    "step," +
-                                                    "mov_script," +
-                                                    "mov_actor," +
-                                                    "mov_img_path)" +
-                            "values (movName, stage, step, movScript, movActoer, movImgPath)");
+                    "stage," +
+                    "step," +
+                    "mov_script," +
+                    "mov_actor," +
+                    "mov_img_path)" +
+                    "values (movName, stage, step, movScript, movActoer, movImgPath)");
         }
     }
 
     public void insertUser(String userCode, int doneMovNum, int currMovNum, int point){
         if (database != null) {
             database.execSQL("insert into xb_user(" +
-                                "user_code," +
-                                "done_mov_num," +
-                                "curr_mov_num," +
-                                "point)" +
+                    "user_code," +
+                    "done_mov_num," +
+                    "curr_mov_num," +
+                    "point)" +
                     "values (userCode, doneMovNum, currMovNum, point)");
         }
     }
@@ -144,9 +147,9 @@ public class MainActivity extends AppCompatActivity {
 
         if (database != null) {
             String sql = "select    user_code," +
-                                    "done_mov_num," +
-                                    "curr_mov_num," +
-                                    "point" +
+                    "done_mov_num," +
+                    "curr_mov_num," +
+                    "point" +
                     " from      xb_user ";
 
             try {
@@ -181,14 +184,14 @@ public class MainActivity extends AppCompatActivity {
 
         if (database != null) {
             String sql = "SELECT ta.mov_num, " +
-                                "ta.mov_name, " +
-                                "ta.stage FROM (" +
-                            "SELECT mov_num, " +
-                                    "mov_name, " +
-                                    "stage " +
-                            "FROM xb_movie " +
-                            "ORDER BY step DESC) ta " +
-                         "GROUP BY stage";
+                    "ta.mov_name, " +
+                    "ta.stage FROM (" +
+                    "SELECT mov_num, " +
+                    "mov_name, " +
+                    "stage " +
+                    "FROM xb_movie " +
+                    "ORDER BY step DESC) ta " +
+                    "GROUP BY stage";
 
             try {
 
