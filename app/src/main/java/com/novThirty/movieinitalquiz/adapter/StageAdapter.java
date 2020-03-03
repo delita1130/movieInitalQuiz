@@ -21,6 +21,7 @@ public class StageAdapter extends BaseAdapter {
     Context mContext;
     private LayoutInflater mInflater;
 
+    
     public StageAdapter(Context mContext, List<Movie> items) {
         this.items = items;
         this.mContext = mContext;
