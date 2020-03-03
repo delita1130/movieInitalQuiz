@@ -48,9 +48,5 @@ public class MainActivity extends AppCompatActivity {
         gridView = findViewById(R.id.gridView);
 
         gridView.setAdapter(adapter);
-
     }
-
-
-
 }

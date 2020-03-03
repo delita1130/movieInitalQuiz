@@ -49,8 +49,7 @@ public class StageAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int i, View view, ViewGroup viewGroup) {
-        LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        view = inflater.inflate(R.layout.item_stage, viewGroup, false);
+        view = mInflater.inflate(R.layout.item_stage, viewGroup, false);
 
         ImageButton stageBtn = view.findViewById(R.id.stageBtn);
         stageBtn.setLayoutParams(new LinearLayout.LayoutParams(450, 500));
