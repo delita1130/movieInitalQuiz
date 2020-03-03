@@ -1,6 +1,7 @@
 package com.novThirty.movieinitalquiz.viewer;
 
 import android.content.Context;
+import android.nfc.Tag;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import com.novThirty.movieinitalquiz.model.User;
 
 public class StageViewer extends LinearLayout {
     ImageButton stageBtn;
+    String TAG = "StageViewer";
 
     public StageViewer(Context mContext) {
         super(mContext);
@@ -33,19 +35,20 @@ public class StageViewer extends LinearLayout {
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.item_stage,this,true);
 
-        stageBtn = (ImageButton) findViewById(R.id.stageBtn);
+        stageBtn = findViewById(R.id.stageBtn);
         stageBtn.setLayoutParams(new LinearLayout.LayoutParams(450, 500));
     }
 
     public void setItem(Movie movie){
         User user = GameStatus.user;
 
-        Log.i("test :: ", movie.getMovNum() + ", " + user.getDoneMovNum() + "");
+        Log.i(TAG, movie.getMovNum() + ", " + user.getCurrMovNum() + "");
 
-        if(movie.getMovNum() < user.getDoneMovNum()){
-            stageBtn.setImageResource(R.drawable.ic_lock_stage);
-        }else{
+        // 최초 user의 currMovNum은 1 이여야 함.
+        if(user.getCurrMovNum() >= movie.getMovNum()){
             stageBtn.setImageResource(R.drawable.ic_open_stage);
+        }else{
+            stageBtn.setImageResource(R.drawable.ic_lock_stage);
         }
     }
 }

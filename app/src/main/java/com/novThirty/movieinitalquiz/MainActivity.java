@@ -1,6 +1,8 @@
 package com.novThirty.movieinitalquiz;
 
+import android.nfc.Tag;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -14,8 +16,10 @@ import com.novThirty.movieinitalquiz.model.Movie;
 import com.novThirty.movieinitalquiz.model.User;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 public class MainActivity extends AppCompatActivity {
+    private String TAG = "MainActivity";
     private GridView gridView;
     private GameDao gameDao;
 
@@ -49,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
+                Log.i(TAG, "진행가능..");
             }
         });
 
