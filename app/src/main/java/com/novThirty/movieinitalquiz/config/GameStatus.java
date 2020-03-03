@@ -2,7 +2,7 @@ package com.novThirty.movieinitalquiz.config;
 
 import com.novThirty.movieinitalquiz.model.User;
 
-public class GameState {
+public class GameStatus {
     public static User user;
 
 }

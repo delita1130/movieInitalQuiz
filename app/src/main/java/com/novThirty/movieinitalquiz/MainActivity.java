@@ -1,8 +1,6 @@
 package com.novThirty.movieinitalquiz;
 
-import android.nfc.Tag;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -10,10 +8,11 @@ import android.widget.GridView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.novThirty.movieinitalquiz.adapter.StageAdapter;
+import com.novThirty.movieinitalquiz.config.GameStatus;
 import com.novThirty.movieinitalquiz.database.GameDao;
 import com.novThirty.movieinitalquiz.model.Movie;
+import com.novThirty.movieinitalquiz.model.User;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -34,7 +33,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadStageList() {
-        List<Movie> movieList = gameDao.getMovieList();
+        // get User
+        User getUser = gameDao.getUser();
+        GameStatus.user = getUser;
+
+        // print Stage
+        List<Movie> movieList = gameDao.getStageList();
 
         StageAdapter adapter = new StageAdapter(this, movieList);
 
@@ -48,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
     }
 
 }

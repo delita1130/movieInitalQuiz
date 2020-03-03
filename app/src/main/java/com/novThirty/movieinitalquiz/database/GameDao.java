@@ -82,15 +82,17 @@ public class GameDao {
         List<Movie> list = null;
 
         if (database != null) {
-            String sql = "SELECT ta.mov_num, " +
-                    "ta.mov_name, " +
-                    "ta.stage FROM (" +
-                    "SELECT mov_num, " +
-                    "mov_name, " +
-                    "stage " +
-                    "FROM xb_movie " +
-                    "ORDER BY step DESC) ta " +
-                    "GROUP BY stage";
+            String sql = "  SELECT    ta.mov_num, " +
+                    "               ta.mov_name, " +
+                    "               ta.stage " +
+                    "       FROM (" +
+                    "           SELECT  mov_num, " +
+                    "                   mov_name, " +
+                    "                   stage " +
+                    "           FROM    xb_movie " +
+                    "           ORDER BY step DESC" +
+                    "       ) ta " +
+                    "       GROUP BY stage";
 
             try {
 
@@ -221,6 +223,8 @@ public class GameDao {
                     " from      xb_movie ";
 
             try {
+                list = new ArrayList<Movie>();
+
                 Cursor cursor = database.rawQuery(sql, null);
                 while (cursor.moveToNext()) {
                     int movNum = cursor.getInt(0);
@@ -231,7 +235,6 @@ public class GameDao {
                     String movActor = cursor.getString(5);
                     String movImgPath = cursor.getString(6);
 
-                    list = new ArrayList<Movie>();
                     list.add(new Movie(movNum, movName, stage, step, movScript, movActor, movImgPath));
                 }
             }catch (Exception e){

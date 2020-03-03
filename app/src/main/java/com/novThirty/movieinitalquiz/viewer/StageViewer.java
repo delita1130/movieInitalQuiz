@@ -2,6 +2,7 @@ package com.novThirty.movieinitalquiz.viewer;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -9,8 +10,9 @@ import android.widget.LinearLayout;
 import androidx.annotation.Nullable;
 
 import com.novThirty.movieinitalquiz.R;
-import com.novThirty.movieinitalquiz.model.GameInfo;
+import com.novThirty.movieinitalquiz.config.GameStatus;
 import com.novThirty.movieinitalquiz.model.Movie;
+import com.novThirty.movieinitalquiz.model.User;
 
 public class StageViewer extends LinearLayout {
     ImageButton stageBtn;
@@ -36,10 +38,14 @@ public class StageViewer extends LinearLayout {
     }
 
     public void setItem(Movie movie){
-        //if(진행한 스테이지){
+        User user = GameStatus.user;
+
+        Log.i("test :: ", movie.getMovNum() + ", " + user.getDoneMovNum() + "");
+
+        if(movie.getMovNum() < user.getDoneMovNum()){
             stageBtn.setImageResource(R.drawable.ic_lock_stage);
-        //}else{
-            //stageBtn.setImageResource(R.drawable.ic_open_stage);
-        //}
+        }else{
+            stageBtn.setImageResource(R.drawable.ic_open_stage);
+        }
     }
 }
