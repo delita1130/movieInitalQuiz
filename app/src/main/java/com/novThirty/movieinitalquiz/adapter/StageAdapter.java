@@ -57,8 +57,10 @@ public class StageAdapter extends BaseAdapter {
 
         User user = GameStatus.user;
 
+        final boolean flag = user.getCurrMovNum() >= items.get(i).getMovNum();
+
         // 최초 user의 currMovNum은 1 이여야 함.
-        if(user.getCurrMovNum() >= items.get(i).getMovNum()){
+        if(flag){
             stageBtn.setImageResource(R.drawable.ic_open_stage);
         }else{
             stageBtn.setImageResource(R.drawable.ic_lock_stage);
@@ -67,6 +69,7 @@ public class StageAdapter extends BaseAdapter {
         stageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(flag)
                 Log.d("test ::", items.get(i).getMovNum() + ";;");
             }
         });
