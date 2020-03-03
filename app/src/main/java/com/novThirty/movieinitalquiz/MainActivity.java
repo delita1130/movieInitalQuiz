@@ -16,6 +16,7 @@ import com.novThirty.movieinitalquiz.model.User;
 
 import java.util.List;
 
+// 깃 테스트
 public class MainActivity extends AppCompatActivity {
     private String TAG = "MainActivity";
     private GridView gridView;

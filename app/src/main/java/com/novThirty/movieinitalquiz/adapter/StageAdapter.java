@@ -65,7 +65,7 @@ public class StageAdapter extends BaseAdapter {
         }else{
             stageBtn.setImageResource(R.drawable.ic_lock_stage);
         }
-        
+
 
         stageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
