@@ -1,22 +1,30 @@
 package com.novThirty.movieinitalquiz.adapter;
 
 import android.content.Context;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
+import com.novThirty.movieinitalquiz.R;
+import com.novThirty.movieinitalquiz.config.GameStatus;
 import com.novThirty.movieinitalquiz.model.Movie;
-import com.novThirty.movieinitalquiz.viewer.StageViewer;
+import com.novThirty.movieinitalquiz.model.User;
 
 import java.util.List;
 
 public class StageAdapter extends BaseAdapter {
     List<Movie> items;
     Context mContext;
+    private LayoutInflater mInflater;
 
     public StageAdapter(Context mContext, List<Movie> items) {
         this.items = items;
         this.mContext = mContext;
+        this.mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
@@ -24,8 +32,8 @@ public class StageAdapter extends BaseAdapter {
         return items.size();
     }
 
-    public void addItem(Movie gameInfo){
-        items.add(gameInfo);
+    public void addItem(Movie movie){
+        items.add(movie);
     }
 
     @Override
@@ -39,15 +47,29 @@ public class StageAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
-        StageViewer stageViewer = new StageViewer(mContext);
-        stageViewer.setItem(items.get(i));
+    public View getView(final int i, View view, ViewGroup viewGroup) {
+        LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        view = inflater.inflate(R.layout.item_stage, viewGroup, false);
 
-        //ivIcon.setLayoutParams(new GridView.LayoutParams(
-        //(int)mContext.getResources().getDimension(R.dimen.widthImageGridview),
-        //(int)mContext.getResources().getDimension(R.dimen.heihgtImageGridview)));
+        ImageButton stageBtn = view.findViewById(R.id.stageBtn);
+        stageBtn.setLayoutParams(new LinearLayout.LayoutParams(450, 500));
 
-        return stageViewer;
+        User user = GameStatus.user;
+
+        // 최초 user의 currMovNum은 1 이여야 함.
+        if(user.getCurrMovNum() >= items.get(i).getMovNum()){
+            stageBtn.setImageResource(R.drawable.ic_open_stage);
+        }else{
+            stageBtn.setImageResource(R.drawable.ic_lock_stage);
+        }
+
+        stageBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("test ::", items.get(i).getMovNum() + ";;");
+            }
+        });
+
+        return view;
     }
-
 }

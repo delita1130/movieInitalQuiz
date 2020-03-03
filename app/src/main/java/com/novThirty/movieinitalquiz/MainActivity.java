@@ -1,6 +1,5 @@
 package com.novThirty.movieinitalquiz;
 
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,7 +15,6 @@ import com.novThirty.movieinitalquiz.model.Movie;
 import com.novThirty.movieinitalquiz.model.User;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 public class MainActivity extends AppCompatActivity {
     private String TAG = "MainActivity";
@@ -50,13 +48,8 @@ public class MainActivity extends AppCompatActivity {
 
         gridView.setAdapter(adapter);
 
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Log.i(TAG, "진행가능..");
-            }
-        });
-
     }
+
+
 
 }
