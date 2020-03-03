@@ -1,34 +1,53 @@
 package com.novThirty.movieinitalquiz;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.ContentValues;
-import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.GridView;
 
-import com.novThirty.movieinitalquiz.database.DataBaseHelper;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.novThirty.movieinitalquiz.adapter.StageAdapter;
 import com.novThirty.movieinitalquiz.database.GameDao;
 import com.novThirty.movieinitalquiz.model.Movie;
-import com.novThirty.movieinitalquiz.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class MainActivity extends AppCompatActivity {
+    private GridView gridView;
+    private GameDao gameDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_quiz_main);
-        Intent intent = new Intent(this, LoadingActivity.class);
-        startActivity(intent);
+        setContentView(R.layout.activity_quiz_stage);
+        /*Intent intent = new Intent(this, LoadingActivity.class);
+        startActivity(intent);*/
 
-        GameDao dao = new GameDao(this);
-        dao.dbConnectTest();
+        gameDao = new GameDao(this);
+        gameDao.dbConnectTest();
+
+        loadStageList();
+    }
+
+    private void loadStageList() {
+        List<Movie> movieList = gameDao.getMovieList();
+
+        StageAdapter adapter = new StageAdapter(this, movieList);
+
+        gridView = findViewById(R.id.gridView);
+
+        gridView.setAdapter(adapter);
+
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+            }
+        });
     }
 
 }
