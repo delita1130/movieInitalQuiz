@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         User getUser = gameDao.getUser();
         GameStatus.user = getUser;
 
-        // print Stage
+        // print Stage//
         List<Movie> movieList = gameDao.getStageList();
 
         StageAdapter adapter = new StageAdapter(this, movieList);
