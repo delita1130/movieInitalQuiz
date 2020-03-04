@@ -24,6 +24,10 @@ public class QuizMainActivity extends AppCompatActivity {
     private Button hintBtn3;
     private Button hintBtn4;
     private TextView answerEdit;
+    private TextView hintText1;
+    private TextView hintText2;
+    private TextView hintText3;
+    private TextView hintText4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,11 +37,11 @@ public class QuizMainActivity extends AppCompatActivity {
         gameDao = new GameDao(this);
         gameDao.dbConnect();
 
-        setUp();
+        setUp(GameStatus.user.getDoneMovNum()+1);
     }
 
-    public void setUp(){
-        movie = gameDao.getMovie(GameStatus.user.getDoneMovNum()+1);
+    public void setUp(int nextMovNum){
+        movie = gameDao.getMovie(nextMovNum);
 
         backButton();
         printQuiz();
@@ -46,12 +50,14 @@ public class QuizMainActivity extends AppCompatActivity {
     }
 
     public void printQuiz(){
+        // 단계 출력
         TextView stepText = findViewById(R.id.stepText);
         stepText.setText(movie.getStep() + " / 5");
 
         // 초성 생성
         StringBuilder x = getInitialSound(movie.getMovName());
 
+        // 초성 출력
         TextView quizText = findViewById(R.id.quizText);
         quizText.setText(x.toString());
     }
@@ -60,11 +66,13 @@ public class QuizMainActivity extends AppCompatActivity {
     public void confirmBtn(){
         confirmBtn = findViewById(R.id.confirmBtn);
         answerEdit = findViewById(R.id.answerEdit);
+        answerEdit.setText("");
 
         confirmBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(answerEdit.equals(movie.getMovName())){
+                if(answerEdit.getText().toString().trim().equals(movie.getMovName().trim())){
+                    setUp(GameStatus.user.getDoneMovNum()+2);
                     Log.i("test :: ", "정답입니다.");
                 }else{
                     Log.i("test :: ", "틀렸습니다.");
@@ -79,11 +87,18 @@ public class QuizMainActivity extends AppCompatActivity {
         hintBtn2 = findViewById(R.id.hintBtn2);
         hintBtn3 = findViewById(R.id.hintBtn3);
         hintBtn4 = findViewById(R.id.hintBtn4);
-        final TextView hintText1 = findViewById(R.id.hintText1);
-        final TextView hintText2 = findViewById(R.id.hintText2);
-        final TextView hintText3 = findViewById(R.id.hintText3);
-        final TextView hintText4 = findViewById(R.id.hintText4);
 
+        hintText1 = findViewById(R.id.hintText1);
+        hintText2 = findViewById(R.id.hintText2);
+        hintText3 = findViewById(R.id.hintText3);
+        hintText4 = findViewById(R.id.hintText4);
+
+        hintText1.setText("");
+        hintText2.setText("");
+        hintText3.setText("");
+        hintText4.setText("");
+
+        // 힌트1
         hintBtn1.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,6 +106,7 @@ public class QuizMainActivity extends AppCompatActivity {
             }
         });
 
+        // 힌트2
         hintBtn2.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -98,6 +114,7 @@ public class QuizMainActivity extends AppCompatActivity {
             }
         });
 
+        // 힌트3
         hintBtn3.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -105,6 +122,7 @@ public class QuizMainActivity extends AppCompatActivity {
             }
         });
 
+        // 힌트4
         hintBtn4.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -125,7 +143,7 @@ public class QuizMainActivity extends AppCompatActivity {
         });
     }
 
-    // 초성 함수 - 한글을 제외한 모든 문자, 숫자등은 공백으로 처리 됨..
+    // 초성 함수 - 한글을 제외한 모든 문자, 숫자등은 공백으로 처리..
     public StringBuilder getInitialSound(String text) {
         String[] chs = {
                 "ㄱ", "ㄲ", "ㄴ", "ㄷ", "ㄸ",
