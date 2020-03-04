@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);*/
 
         gameDao = new GameDao(this);
-        gameDao.dbConnectTest();
+        gameDao.dbConnect();
 
         loadStageList();
     }

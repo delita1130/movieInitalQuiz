@@ -4,6 +4,7 @@ public class User {
     private String userCode;
     private int doneMovNum;
     private int currMovNum;
+    private int nextMovNum;
     private int point;
 
     public User(String userCode, int doneMovNum, int currMovNum, int point) {
@@ -27,6 +28,7 @@ public class User {
 
     public void setDoneMovNum(int doneMovNum) {
         this.doneMovNum = doneMovNum;
+        this.nextMovNum += 1;
     }
 
     public int getCurrMovNum() {
@@ -37,6 +39,8 @@ public class User {
         this.currMovNum = currMovNum;
     }
 
+    public int getNextMovNum() { return nextMovNum; }
+
     public int getPoint() {
         return point;
     }
@@ -44,4 +48,5 @@ public class User {
     public void setPoint(int point) {
         this.point = point;
     }
+
 }

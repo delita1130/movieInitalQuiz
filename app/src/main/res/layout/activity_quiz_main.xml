@@ -18,7 +18,7 @@
         android:layout_marginTop="15dp">
 
         <ImageButton
-            android:id="@+id/imageButton"
+            android:id="@+id/backButton"
             android:layout_width="45dp"
             android:layout_height="45dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -30,15 +30,15 @@
             app:srcCompat="?attr/homeAsUpIndicator" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/stepText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="53dp"
-            android:text="단계 5/20"
+            android:text="단계 4/5"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/imageButton"
+            app:layout_constraintStart_toStartOf="@+id/backButton"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
@@ -48,7 +48,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.44"
-            app:layout_constraintStart_toEndOf="@+id/textView"
+            app:layout_constraintStart_toEndOf="@+id/stepText"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/g_image" />
 
@@ -82,7 +82,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/quizText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="5dp"
@@ -94,7 +94,6 @@
             android:layout_weight="1"
             android:background="@drawable/edge"
             android:gravity="center_vertical"
-            android:text="ㄱㄷㅇㅈㅇㅂㄱㄹㅅㅅ"
             android:textAlignment="center"
             android:textColor="#fff"
             android:textSize="40dp"
@@ -111,16 +110,15 @@
         android:orientation="horizontal">
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/answerEdit"
             android:layout_width="294dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="인터스텔" />
+            android:inputType="textPersonName" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/confirmBtn"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -141,8 +139,8 @@
             android:layout_height="65dp"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/textView11"
+            <Button
+                android:id="@+id/hintBtn1"
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:layout_marginRight="10dp"
@@ -155,13 +153,12 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/textView12"
+                android:id="@+id/hintText1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/edge"
                 android:gravity="center_vertical"
-                android:text="우린답을 찾을꺼야! 늘 그랬듯이~"
                 android:textAlignment="center" />
         </LinearLayout>
 
@@ -171,8 +168,8 @@
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/textView13"
+            <Button
+                android:id="@+id/hintBtn2"
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:layout_marginRight="10dp"
@@ -185,13 +182,12 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/textView14"
+                android:id="@+id/hintText2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/edge"
                 android:gravity="center_vertical"
-                android:text="크리스토퍼 놀란, 메튜 매커너히, 엔 해서웨이"
                 android:textAlignment="center"
                 android:textSize="10sp" />
         </LinearLayout>
@@ -202,8 +198,8 @@
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/textView15"
+            <Button
+                android:id="@+id/hintBtn3"
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:layout_marginRight="10dp"
@@ -216,13 +212,12 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/textView16"
+                android:id="@+id/hintText3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/edge"
                 android:gravity="center_vertical"
-                android:text="사진 힌트"
                 android:textAlignment="center"
                 android:textSize="10sp" />
         </LinearLayout>
@@ -233,26 +228,27 @@
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/textView22"
+            <Button
+                android:id="@+id/hintBtn4"
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:layout_marginRight="10dp"
                 android:layout_weight="0.25"
                 android:background="@drawable/edge"
                 android:gravity="center_vertical"
-                android:text=" 정 답"
+                android:text="정 답"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textSize="18sp" />
 
-            <ImageView
-                android:id="@+id/imageView2"
+            <TextView
+                android:id="@+id/hintText4"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/edge"
                 app:srcCompat="@drawable/ic_lock_stage" />
+
         </LinearLayout>
     </LinearLayout>
 
