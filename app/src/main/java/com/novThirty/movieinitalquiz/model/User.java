@@ -49,4 +49,14 @@ public class User {
         this.point = point;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "userCode='" + userCode + '\'' +
+                ", doneMovNum=" + doneMovNum +
+                ", currMovNum=" + currMovNum +
+                ", nextMovNum=" + nextMovNum +
+                ", point=" + point +
+                '}';
+    }
 }

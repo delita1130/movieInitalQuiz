@@ -36,7 +36,9 @@ public class QuizMainActivity extends AppCompatActivity {
 
         gameDao = new GameDao(this);
         gameDao.dbConnect();
-
+        Log.d("test :: ", GameStatus.user.toString());
+        Log.d("test :: 완료 된 영화번호", GameStatus.user.getDoneMovNum() + "");
+        //gameDao.updateDoneMovNum(0);
         setUp(GameStatus.user.getDoneMovNum()+1);
     }
 
@@ -72,7 +74,9 @@ public class QuizMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(answerEdit.getText().toString().trim().equals(movie.getMovName().trim())){
-                    setUp(GameStatus.user.getDoneMovNum()+2);
+                    gameDao.updateDoneMovNum(GameStatus.user.getDoneMovNum()+1);
+                    setUp(GameStatus.user.getDoneMovNum()+1);
+
                     Log.i("test :: ", "정답입니다.");
                 }else{
                     Log.i("test :: ", "틀렸습니다.");
@@ -162,7 +166,7 @@ public class QuizMainActivity extends AppCompatActivity {
 
                 sb.append(chs[cho]);
             }else{
-                sb.append(" ");
+                sb.append(text.charAt(i));
             }
         }
 

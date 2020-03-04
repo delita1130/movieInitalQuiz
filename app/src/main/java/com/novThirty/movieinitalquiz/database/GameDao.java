@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.novThirty.movieinitalquiz.config.GameStatus;
 import com.novThirty.movieinitalquiz.model.Movie;
 import com.novThirty.movieinitalquiz.model.User;
 
@@ -21,7 +22,6 @@ public class GameDao {
     private SQLiteDatabase database;
 
     public static List<Movie> MovieList;
-    public static User User = null;
 
     public GameDao(Context context){
         this.context = context;
@@ -32,7 +32,7 @@ public class GameDao {
 
         MovieList = getMovieList();
 
-        User = getUser();
+        GameStatus.user = getUser();
     }
 
     private void createDatabase() {
@@ -175,7 +175,24 @@ public class GameDao {
             }
         }
 
-        User = getUser();
+        GameStatus.user = getUser();
+    }
+
+    // A-5
+    // @param doneMovNum : 완료 된 movNum
+   public void updateDoneMovNum(int doneMovNum){
+        if (database != null) {
+            try {
+                ContentValues values = new ContentValues();
+                values.put("done_mov_num",  doneMovNum);
+
+                database.update("xb_user", values, "1=1", new String[] {});
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
+        GameStatus.user = getUser();
     }
 
 
@@ -186,15 +203,15 @@ public class GameDao {
         MovieList = getMovieList();
         Log.e(TAG, MovieList.get(0).getMovActor());
 
-        User = getUser();
+        GameStatus.user = getUser();
 
-        int x = User.getPoint();
+        int x = GameStatus.user.getPoint();
         Log.i("test :: ", x + "");
 
         updatePoint(getUser().getPoint() + 10);
 
-        User = getUser();
-        x = User.getPoint();
+        GameStatus.user = getUser();
+        x = GameStatus.user.getPoint();
 
         List<Movie> list = getStageList();
 

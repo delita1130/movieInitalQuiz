@@ -37,7 +37,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadStageList() {
         // get User
-        User getUser = gameDao.getUser();
+        User getUser = GameStatus.user;
+        Log.d("test :: ", getUser.getDoneMovNum()+"");
         GameStatus.user = getUser;
 
         // print Stage
