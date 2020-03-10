@@ -61,6 +61,7 @@ public class QuizMainActivity extends AppCompatActivity {
         // 초성 생성
         StringBuilder x = getInitialSound(movie.getMovName());
 
+        
         // 초성 출력
         TextView quizText = findViewById(R.id.quizText);
         quizText.setText(x.toString());
