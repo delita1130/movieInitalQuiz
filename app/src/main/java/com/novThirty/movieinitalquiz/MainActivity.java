@@ -30,14 +30,15 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);*/
 
         gameDao = new GameDao(this);
-        gameDao.dbConnectTest();
+        gameDao.dbConnect();
 
         loadStageList();
     }
 
     private void loadStageList() {
         // get User
-        User getUser = gameDao.getUser();
+        User getUser = GameStatus.user;
+        Log.d("test :: ", getUser.getDoneMovNum()+"");
         GameStatus.user = getUser;
 
         // print Stage//
@@ -48,9 +49,5 @@ public class MainActivity extends AppCompatActivity {
         gridView = findViewById(R.id.gridView);
 
         gridView.setAdapter(adapter);
-
     }
-
-
-
 }

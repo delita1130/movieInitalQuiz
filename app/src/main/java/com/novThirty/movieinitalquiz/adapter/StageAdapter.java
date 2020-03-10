@@ -1,7 +1,7 @@
 package com.novThirty.movieinitalquiz.adapter;
 
 import android.content.Context;
-import android.util.Log;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
+import com.novThirty.movieinitalquiz.QuizMainActivity;
 import com.novThirty.movieinitalquiz.R;
 import com.novThirty.movieinitalquiz.config.GameStatus;
 import com.novThirty.movieinitalquiz.model.Movie;
@@ -49,8 +50,7 @@ public class StageAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int i, View view, ViewGroup viewGroup) {
-        LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        view = inflater.inflate(R.layout.item_stage, viewGroup, false);
+        view = mInflater.inflate(R.layout.item_stage, viewGroup, false);
 
         ImageButton stageBtn = view.findViewById(R.id.stageBtn);
         stageBtn.setLayoutParams(new LinearLayout.LayoutParams(450, 500));
@@ -66,12 +66,13 @@ public class StageAdapter extends BaseAdapter {
             stageBtn.setImageResource(R.drawable.ic_lock_stage);
         }
 
-
         stageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(flag)
-                Log.d("test ::", items.get(i).getMovNum() + ";;");
+                if(flag) {
+                    Intent intent = new Intent(mContext, QuizMainActivity.class);
+                    v.getContext().startActivity(intent);
+                }
             }
         });
 

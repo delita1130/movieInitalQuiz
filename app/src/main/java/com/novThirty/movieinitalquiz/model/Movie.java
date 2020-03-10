@@ -80,19 +80,4 @@ public class Movie {
     public void setMovImgPath(String movImgPath) {
         this.movImgPath = movImgPath;
     }
-
-    @Override
-    public String toString() {
-        return "Movie{" +
-                "movNum=" + movNum +
-                ", movName='" + movName + '\'' +
-                ", stage='" + stage + '\'' +
-                ", step='" + step + '\'' +
-                ", movScript='" + movScript + '\'' +
-                ", movActor='" + movActor + '\'' +
-                ", movImgPath='" + movImgPath + '\'' +
-                '}';
-    }
-
-
 }
