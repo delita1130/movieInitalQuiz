@@ -17,5 +17,14 @@
             android:layout_marginBottom="10dp"
             android:layout_gravity="center"
             android:text="틀렸습니다~!" />
+
+        <Button
+            android:id="@+id/okBtn"
+            android:layout_width="150dp"
+            android:layout_height="60dp"
+            android:background="@color/colorPrimaryDark"
+            android:text="확인">
+        </Button>
+
     </LinearLayout>
 </LinearLayout>

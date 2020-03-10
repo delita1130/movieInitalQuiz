@@ -1,5 +1,6 @@
 package com.novThirty.movieinitalquiz;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.novThirty.movieinitalquiz.config.GameStatus;
 import com.novThirty.movieinitalquiz.database.GameDao;
+import com.novThirty.movieinitalquiz.dialog.IncorrentDialog;
 import com.novThirty.movieinitalquiz.model.Movie;
 
 public class QuizMainActivity extends AppCompatActivity {
@@ -76,10 +78,9 @@ public class QuizMainActivity extends AppCompatActivity {
                 if(answerEdit.getText().toString().trim().equals(movie.getMovName().trim())){
                     gameDao.updateDoneMovNum(GameStatus.user.getDoneMovNum()+1);
                     setUp(GameStatus.user.getDoneMovNum()+1);
-
-                    Log.i("test :: ", "정답입니다.");
                 }else{
-                    Log.i("test :: ", "틀렸습니다.");
+                    IncorrentDialog incorrentDlg = new IncorrentDialog(QuizMainActivity.this);
+                    incorrentDlg.callFunction(answerEdit);
                 }
             }
         }) ;
