@@ -1,11 +1,8 @@
 package com.novThirty.movieinitalquiz;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -13,7 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.novThirty.movieinitalquiz.config.GameStatus;
 import com.novThirty.movieinitalquiz.database.GameDao;
-import com.novThirty.movieinitalquiz.dialog.IncorrentDialog;
+import com.novThirty.movieinitalquiz.dialog.CorrectDialog;
+import com.novThirty.movieinitalquiz.dialog.IncorrectDialog;
 import com.novThirty.movieinitalquiz.model.Movie;
 
 public class QuizMainActivity extends AppCompatActivity {
@@ -38,8 +36,7 @@ public class QuizMainActivity extends AppCompatActivity {
 
         gameDao = new GameDao(this);
         gameDao.dbConnect();
-        Log.d("test :: ", GameStatus.user.toString());
-        Log.d("test :: 완료 된 영화번호", GameStatus.user.getDoneMovNum() + "");
+
         //gameDao.updateDoneMovNum(0);
         setUp(GameStatus.user.getDoneMovNum()+1);
     }
@@ -61,7 +58,6 @@ public class QuizMainActivity extends AppCompatActivity {
         // 초성 생성
         StringBuilder x = getInitialSound(movie.getMovName());
 
-        
         // 초성 출력
         TextView quizText = findViewById(R.id.quizText);
         quizText.setText(x.toString());
@@ -76,15 +72,18 @@ public class QuizMainActivity extends AppCompatActivity {
         confirmBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(answerEdit.getText().toString().trim().equals(movie.getMovName().trim())){
-                    gameDao.updateDoneMovNum(GameStatus.user.getDoneMovNum()+1);
-                    setUp(GameStatus.user.getDoneMovNum()+1);
-                }else{
-                    IncorrentDialog incorrentDlg = new IncorrentDialog(QuizMainActivity.this);
-                    incorrentDlg.callFunction(answerEdit);
-                }
+            // 정답이면..
+            if(answerEdit.getText().toString().trim().equals(movie.getMovName().trim())){
+                CorrectDialog incorrectDialog = new CorrectDialog(QuizMainActivity.this);
+
+                gameDao.updateDoneMovNum(GameStatus.user.getDoneMovNum()+1);    // 완료 된 번호 db업데이트 후 다음 문제를 갖고 온다.
+                setUp(GameStatus.user.getDoneMovNum()+1); // 다음 문제 출력등 셋업한다.
+            }else{  // 틀렸으면..
+                IncorrectDialog incorrectDialog = new IncorrectDialog(QuizMainActivity.this);
+                incorrectDialog.callFunction(answerEdit);
             }
-        }) ;
+            }
+        });
     }
 
     // 힌트 버튼들
@@ -149,7 +148,7 @@ public class QuizMainActivity extends AppCompatActivity {
         });
     }
 
-    // 초성 함수 - 한글을 제외한 모든 문자, 숫자등은 공백으로 처리..
+    // 초성 함수
     public StringBuilder getInitialSound(String text) {
         String[] chs = {
                 "ㄱ", "ㄲ", "ㄴ", "ㄷ", "ㄸ",
