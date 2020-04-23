@@ -90,7 +90,7 @@ public class GameDao {
                     "                   mov_name, " +
                     "                   stage " +
                     "           FROM    xb_movie " +
-                    "           ORDER BY step DESC" +
+                    "           ORDER BY step ASC" +
                     "       ) ta " +
                     "       GROUP BY stage";
 
