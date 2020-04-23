@@ -84,11 +84,13 @@ public class GameDao {
         if (database != null) {
             String sql = "  SELECT    ta.mov_num, " +
                     "               ta.mov_name, " +
-                    "               ta.stage " +
+                    "               ta.stage, " +
+                    "               ta.step " +
                     "       FROM (" +
                     "           SELECT  mov_num, " +
                     "                   mov_name, " +
-                    "                   stage " +
+                    "                   stage, " +
+                    "                   step " +
                     "           FROM    xb_movie " +
                     "           ORDER BY step ASC" +
                     "       ) ta " +
