@@ -2,6 +2,7 @@ package com.novThirty.movieinitalquiz.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,6 +59,8 @@ public class StageAdapter extends BaseAdapter {
         User user = GameStatus.user;
 
         final boolean flag = user.getCurrMovNum() >= items.get(i).getMovNum();
+
+        Log.d("test :: ", "");
 
         // 최초 user의 currMovNum은 1 이여야 함.
         if(flag){
