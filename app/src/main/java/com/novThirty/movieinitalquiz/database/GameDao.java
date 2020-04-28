@@ -128,7 +128,6 @@ public class GameDao {
     // @param currMovNum : 가져와야 할 무비 번호를 넣어주세요.
     public Movie getMovie(int currMovNum){
         Movie movie = null;
-
         if (database != null) {
             String sql = "SELECT mov_num, mov_name, stage, step, mov_script, mov_actor, mov_img_path FROM xb_movie WHERE mov_num =" + currMovNum;
 
@@ -153,7 +152,7 @@ public class GameDao {
                     movImgPath = cursor.getString(6);
                 }
 
-                movie = new Movie(movNum, movName, step, stage, movScript, movActor, movImgPath);
+                movie = new Movie(movNum, movName, stage, step, movScript, movActor, movImgPath);
 
             }catch (Exception e){
                 Log.e(TAG, e.toString());

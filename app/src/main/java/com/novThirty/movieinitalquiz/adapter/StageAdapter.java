@@ -16,77 +16,88 @@ import com.novThirty.movieinitalquiz.config.GameStatus;
 import com.novThirty.movieinitalquiz.model.Movie;
 import com.novThirty.movieinitalquiz.model.User;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 public class StageAdapter extends BaseAdapter {
-    List<Movie> items;
-    Context mContext;
+    private List<Movie> mItemList;
+    private Context mContext;
     private LayoutInflater mInflater;
+    private ViewHolder mHolder;
 
+    private class ViewHolder {
+        ImageButton item;
+    }
 
     public StageAdapter(Context mContext, List<Movie> items) {
-        this.items = items;
+        this.mItemList = items;
         this.mContext = mContext;
         this.mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
     public int getCount() {
-        return items.size();
-    }
-
-    public void addItem(Movie movie){
-        items.add(movie);
-    }
-
-    @Override
-    public Movie getItem(int i) {
-        return items.get(i);
-    }
-
-    @Override
-    public long getItemId(int i) {
-        return i;
-    }
-
-    @Override
-    public View getView(final int i, View convertView, ViewGroup viewGroup) {
-        View view = convertView;
-        if(view == null){
-            view = mInflater.inflate(R.layout.item_stage, viewGroup, false);
+        if(mItemList.size()>0) {
+            return mItemList.size();
         }
+        return 0;
+    }
 
-        ImageButton stageBtn = view.findViewById(R.id.stageBtn);
-        stageBtn.setLayoutParams(new LinearLayout.LayoutParams(450, 500));
+    @Override
+    public Object getItem(int position) {
+        return mItemList.get(position);
+    }
 
-        User user = GameStatus.user;
+    @Override
+    public long getItemId(int position) {
+        return 0;
+    }
+
+    @Override
+    public View getView(final int i, View convertView, ViewGroup parent) {
+        if(convertView == null){
+            convertView = mInflater.inflate(R.layout.item_stage, parent, false);
+            mHolder = new ViewHolder();
+            mHolder.item = convertView.findViewById(R.id.stageBtn);
+            mHolder.item.setLayoutParams(new LinearLayout.LayoutParams(450, 500));
+
+            convertView.setTag(mHolder);
+        }else {
+            mHolder = (ViewHolder) convertView.getTag();
+        }
 
         // 완료 번호가 문제의 번호보다 크거나 같으면 stage을 열어 둔다.
         // 첫번째 stage는 무조건 연다. 처음 시작하면 완료번호가 0이기 때문에 열어 둔다.
-
-        final boolean flag = user.getDoneMovNum() + GameStatus.numOfstepPerStage + 1 >= items.get(i).getMovNum();
+        //5 + 5 >= 10
+        final boolean flag = GameStatus.user.getDoneMovNum() + GameStatus.numOfstepPerStage >= mItemList.get(i).getMovNum();
 
         Log.d("test :: 루프 번호 : ", i + "");
-        Log.d("test :: 문제 번호 : ", items.get(i).getMovNum() + "");
-        Log.d("test :: 완료 번호 : ", user.getDoneMovNum() + 1 + "");
-        Log.d("test :: 스테이지 번호 : ", items.get(i).getStage() + "");
+        Log.d("test :: 문제 시작 번호 : ", mItemList.get(i).getMovNum() + "");
+        Log.d("test :: 완료 번호 : ", GameStatus.user.getDoneMovNum() + "");
+        Log.d("test :: 스테이지 번호 : ", mItemList.get(i).getStage() + "");
 
         if(flag) {
-            stageBtn.setImageResource(R.drawable.ic_open_stage);
+            mHolder.item.setImageResource(R.drawable.ic_open_stage);
         }else {
-            stageBtn.setImageResource(R.drawable.ic_lock_stage);
+            mHolder.item.setImageResource(R.drawable.ic_lock_stage);
         }
 
-        stageBtn.setOnClickListener(new View.OnClickListener() {
+        mHolder.item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(flag) {
                     Intent intent = new Intent(mContext, QuizMainActivity.class);
+                    intent.putExtra("clickStage", mItemList.get(i).getStage());
+                    intent.putExtra("clickFirstMovNum", mItemList.get(i).getStage());
+
                     v.getContext().startActivity(intent);
                 }
+
+                Log.d("test :: 선택 ", "" + mItemList.get(i).getMovNum());
             }
         });
 
-        return view;
+        return convertView;
     }
 }

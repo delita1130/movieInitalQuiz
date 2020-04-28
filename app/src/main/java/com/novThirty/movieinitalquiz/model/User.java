@@ -1,5 +1,7 @@
 package com.novThirty.movieinitalquiz.model;
 
+import android.util.Log;
+
 public class User {
     private String userCode;
     private int doneMovNum;
@@ -12,6 +14,7 @@ public class User {
         this.doneMovNum = doneMovNum;
         this.currMovNum = currMovNum;
         this.point = point;
+        this.nextMovNum = doneMovNum + 1;
     }
 
     public String getUserCode() {
