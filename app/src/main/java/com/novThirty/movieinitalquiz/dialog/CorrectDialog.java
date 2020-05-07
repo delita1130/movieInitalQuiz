@@ -17,9 +17,8 @@ public class CorrectDialog {
             this.context = context;
         }
 
-
         // 호출할 다이얼로그 함수를 정의한다.
-        public int callFunction(final TextView textView) {
+        public int callFunction(final String pointTextString ) {
 
             // 커스텀 다이얼로그를 정의하기위해 Dialog클래스를 생성한다.
             final Dialog dlg = new Dialog(context);
@@ -28,12 +27,15 @@ public class CorrectDialog {
             dlg.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
             // 커스텀 다이얼로그의 레이아웃을 설정한다.
-            dlg.setContentView(R.layout.dialog_3);
+            dlg.setContentView(R.layout.dialog_2);
 
             // 커스텀 다이얼로그를 노출한다.
             dlg.show();
 
             LinearLayout layout = dlg.findViewById(R.id.okLayout);
+            TextView point = dlg.findViewById(R.id.pointText);
+
+            point.setText(pointTextString);
 
             layout.setOnClickListener(new View.OnClickListener() {
                 @Override

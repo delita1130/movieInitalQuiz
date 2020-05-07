@@ -4,7 +4,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:background="@color/colorPrimary">
+    android:background="@color/colorPrimary"
+    android:id="@+id/okLayout">
     <LinearLayout
         android:layout_width="300dp"
         android:layout_height="150dp"
@@ -12,6 +13,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/mainText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
@@ -33,16 +35,25 @@
                 android:layout_gravity="center"/>
 
             <TextView
+                android:id="@+id/pointText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="200 포인트" />
+                android:text="200" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="포인트" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="50dp">
             <Button
+                android:id="@+id/OKButton"
                 android:layout_width="150dp"
                 android:layout_height="60dp"
                 android:background="@color/colorPrimaryDark"
@@ -50,6 +61,7 @@
 
             </Button>
             <Button
+                android:id="@+id/CancelButton"
                 android:layout_width="150dp"
                 android:layout_height="60dp"
                 android:background="@color/colorPrimaryDark"

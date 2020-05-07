@@ -6,6 +6,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.novThirty.movieinitalquiz.adapter.StageAdapter;
@@ -23,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private String TAG = "MainActivity";
     private GridView gridView;
     private GameDao gameDao;
-
+    private AdView mAdView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +40,19 @@ public class MainActivity extends AppCompatActivity {
         gameDao.dbConnect();
 
         loadStageList();
+
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
+
+
+
     }
 
     private void loadStageList() {
