@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private GridView gridView;
     private GameDao gameDao;
     private AdView mAdView;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
