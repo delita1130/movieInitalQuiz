@@ -181,11 +181,11 @@ public class GameDao {
 
     // A-5
     // @param doneMovNum : 완료 된 movNum
-   public void updateCurrMovNum(int currMovNum){
+    public void updateDoneMovNum(int doneMovNum){
         if (database != null) {
             try {
                 ContentValues values = new ContentValues();
-                values.put("curr_mov_num",  currMovNum);
+                values.put("done_mov_num",  doneMovNum);
 
                 database.update("xb_user", values, "1=1", new String[] {});
             }catch (Exception e){

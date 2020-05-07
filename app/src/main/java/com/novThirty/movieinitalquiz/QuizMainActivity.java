@@ -55,6 +55,7 @@ public class QuizMainActivity extends AppCompatActivity {
 
         gameDao = new GameDao(this);
         gameDao.dbConnect();
+        pointText = findViewById(R.id.pointText);
 
         Intent intent = getIntent();
         String clickStage = intent.getStringExtra("clickStage");
@@ -67,7 +68,7 @@ public class QuizMainActivity extends AppCompatActivity {
         }else{*/
             setUp(Integer.parseInt(clickFirstMovNum));
         /*}*/
-        pointText = findViewById(R.id.pointText);
+
         //gameDao.updateDoneMovNum(0);
         setUp(GameStatus.user.getDoneMovNum()+1);
 
@@ -91,8 +92,6 @@ public class QuizMainActivity extends AppCompatActivity {
             }
         };
         rewardedAd.loadAd(adRequest, adLoadCallback);
-
-
 
         rewardButton.setOnClickListener(new Button.OnClickListener() {
             HintDialog rewardDialog;
