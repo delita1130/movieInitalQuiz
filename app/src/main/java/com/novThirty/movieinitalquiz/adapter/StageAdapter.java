@@ -70,11 +70,11 @@ public class StageAdapter extends BaseAdapter {
         // 완료 번호가 문제의 번호보다 크거나 같으면 stage을 열어 둔다.
         // 첫번째 stage는 무조건 연다. 처음 시작하면 완료번호가 0이기 때문에 열어 둔다.
         //5 >= 6
-        final boolean flag = GameStatus.user.getDoneMovNum() >= mItemList.get(i).getMovNum();
+        final boolean flag = GameStatus.user.getDoneMovNum()+1 >= mItemList.get(i).getMovNum();
 
-       /* Log.d("test :: open : ", flag + "");
+        Log.d("test :: open : ", flag + "");
         Log.d("test :: 루프 번호 : ", i + "");
-        Log.d("test :: 문제 시작 번호 : ", mItemList.get(i).getMovNum() + "");
+       /* Log.d("test :: 문제 시작 번호 : ", mItemList.get(i).getMovNum() + "");
         Log.d("test :: 완료 번호 : ", GameStatus.user.getDoneMovNum() + "");
         Log.d("test :: 스테이지 번호 : ", mItemList.get(i).getStage() + "");*/
 

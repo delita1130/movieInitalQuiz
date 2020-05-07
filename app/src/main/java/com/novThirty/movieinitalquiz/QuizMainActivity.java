@@ -60,18 +60,21 @@ public class QuizMainActivity extends AppCompatActivity {
         String clickStage = intent.getStringExtra("clickStage");
         String clickFirstMovNum = intent.getStringExtra("clickFirstMovNum");
 
-        int doingStage = (int)Math.floor(GameStatus.user.getDoneMovNum() / GameStatus.numOfstepPerStage);
+        int doingStage = (int)Math.floor(GameStatus.user.getDoneMovNum() / GameStatus.numOfstepPerStage)+1;
 
-        if(doingStage >= Integer.parseInt(clickStage)){  // 이전 스테이지를 클릭하면 그 스테이지의 첫번째 문제를 가지고 온다.
-            setUp(Integer.parseInt(clickFirstMovNum));
-            GameStatus.user.setCurrMovNum(Integer.parseInt(clickFirstMovNum));
-            Log.d("test :: 다음 문제1 :: " , clickFirstMovNum + "");
-        }else{
+        Log.d("test :: 진행중인스테이지 :: " ,  doingStage + "");
+        Log.d("test :: 클릭한스테이 :: " ,  clickStage + "");
+
+        if(doingStage == Integer.parseInt(clickStage)){  // 진행중인문제
             setUp(GameStatus.user.getNextMovNum());
             GameStatus.user.setCurrMovNum(GameStatus.user.getNextMovNum());
-
-
+            Log.d("test :: 진행중인스테이지 :: " ,  GameStatus.user.getNextMovNum() + "");
+        }else{  // 진행했던문제
+            setUp(Integer.parseInt(clickFirstMovNum));
+            GameStatus.user.setCurrMovNum(Integer.parseInt(clickFirstMovNum));
+            Log.d("test :: 진행했던스테이 :: " , clickFirstMovNum + "");
         }
+
         activity = this;
 
         rewardButton = findViewById(R.id.imageButton2);
@@ -170,16 +173,16 @@ public class QuizMainActivity extends AppCompatActivity {
         rerewardedAd.loadAd(new AdRequest.Builder().build(), adLoadCallback);
         return rerewardedAd;
     }
+
     public void setUp(int nextMovNum){
-        Log.d("test :: 다음 문제2 :: " , nextMovNum + "");
+        gameDao.updateCurrMovNum(nextMovNum);
+
+        Log.d("test :: 진행 문제 :: " , nextMovNum + ", " + gameDao.getUser().getDoneMovNum());
         movie = gameDao.getMovie(nextMovNum);
 
         GameStatus.user= gameDao.getUser();
         Integer point = new Integer(GameStatus.user.getPoint());
         pointText.setText(point.toString());
-
-        // 현재 진행 중인 문제 번호
-        GameStatus.user.setCurrMovNum(nextMovNum);
 
         backButton();
         printQuiz();
@@ -210,25 +213,33 @@ public class QuizMainActivity extends AppCompatActivity {
         confirmBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-            // 정답이면..
-            if(answerEdit.getText().toString().trim().equals(movie.getMovName().trim())){
-                CorrectDialog correctDialog = new CorrectDialog(QuizMainActivity.this);
-                correctDialog.callFunction(answerPoint.toString());
+                // 정답이면..
+                if(answerEdit.getText().toString().trim().equals(movie.getMovName().trim())){
+                    CorrectDialog correctDialog = new CorrectDialog(QuizMainActivity.this);
+                    correctDialog.callFunction(answerPoint.toString());
 
-                gameDao.updatePoint( GameStatus.user.getPoint() + answerPoint );
-                GameStatus.user = gameDao.getUser();
-                if(GameStatus.user.getCurrMovNum() == GameStatus.user.getDoneMovNum() + 1) {  // 진행 중인 문제를 맞추면
-                    GameStatus.user.setDoneMovNum(GameStatus.user.getDoneMovNum()+1);
-                    gameDao.updateDoneMovNum(GameStatus.user.getDoneMovNum());    // 완료 된 번호 db업데이트
+                    gameDao.updatePoint( GameStatus.user.getPoint() + answerPoint );
+                    GameStatus.user = gameDao.getUser();
 
-                    setUp(GameStatus.user.getNextMovNum()); // 다음 문제 출력
-                }else {
-                    setUp(GameStatus.user.getCurrMovNum()+1);
+                    Log.d("test :: 비고",  GameStatus.user.getCurrMovNum() + ", " + GameStatus.user.getDoneMovNum());
+
+                    if(GameStatus.user.getCurrMovNum() == GameStatus.user.getDoneMovNum()+1) {  // 진행 중인 문제를 맞추면
+                        Log.d("test :: 진행중인문제", "입니다.");
+                        GameStatus.user.setDoneMovNum(GameStatus.user.getDoneMovNum()+1);
+                        gameDao.updateDoneMovNum(GameStatus.user.getDoneMovNum());    // 완료 된 번호 db업데이트
+
+                        setUp(GameStatus.user.getNextMovNum()); // 다음 문제 출력
+                    }else {
+                        Log.d("test :: 진행했던문", "입니다.");
+                        GameStatus.user.setCurrMovNum(GameStatus.user.getCurrMovNum()+1);
+                        gameDao.updateCurrMovNum(GameStatus.user.getCurrMovNum());    // 완료 된 번호 db업데이트
+
+                        setUp(GameStatus.user.getCurrMovNum());
+                    }
+                }else{  // 틀렸으면..
+                    IncorrectDialog incorrectDialog = new IncorrectDialog(QuizMainActivity.this);
+                    incorrectDialog.callFunction(answerEdit);
                 }
-            }else{  // 틀렸으면..
-                IncorrectDialog incorrectDialog = new IncorrectDialog(QuizMainActivity.this);
-                incorrectDialog.callFunction(answerEdit);
-            }
             }
         });
     }

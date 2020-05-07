@@ -63,7 +63,7 @@ public class GameDao {
                 while (cursor.moveToNext()) {
                     userCode = cursor.getString(0);
                     doneMovNum = cursor.getInt(1);
-                    //currMovNum = cursor.getInt(2);
+                    currMovNum = cursor.getInt(2);
                     point = cursor.getInt(3);
                 }
 
@@ -160,6 +160,21 @@ public class GameDao {
         }
 
         return movie;
+    }
+
+    public void updateCurrMovNum(int currMovNum){
+        if (database != null) {
+            try {
+                ContentValues values = new ContentValues();
+                values.put("curr_mov_num",  currMovNum);
+
+                database.update("xb_user", values, "1=1", new String[] {});
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
+        GameStatus.user = getUser();
     }
 
     // A-4
