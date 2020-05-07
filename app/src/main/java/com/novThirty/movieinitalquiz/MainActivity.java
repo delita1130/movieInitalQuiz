@@ -14,6 +14,8 @@ import com.novThirty.movieinitalquiz.database.GameDao;
 import com.novThirty.movieinitalquiz.model.Movie;
 import com.novThirty.movieinitalquiz.model.User;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 // 깃 테스트
@@ -44,9 +46,7 @@ public class MainActivity extends AppCompatActivity {
         List<Movie> movieList = gameDao.getStageList();
 
         StageAdapter adapter = new StageAdapter(this, movieList);
-
         gridView = findViewById(R.id.gridView);
-
         gridView.setAdapter(adapter);
     }
 }
