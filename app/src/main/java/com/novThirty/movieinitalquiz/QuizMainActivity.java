@@ -79,22 +79,7 @@ public class QuizMainActivity extends AppCompatActivity {
 
         rewardButton = findViewById(R.id.imageButton2);
 
-        rewardedAd = new RewardedAd(this,
-                "ca-app-pub-3940256099942544/5224354917");
-
-        AdRequest adRequest = new AdRequest.Builder().build();
-        RewardedAdLoadCallback adLoadCallback = new RewardedAdLoadCallback() {
-            @Override
-            public void onRewardedAdLoaded() {
-                // Ad successfully loaded.
-            }
-
-            @Override
-            public void onRewardedAdFailedToLoad(int errorCode) {
-                rewardedAd = createAndLoadRewardedAd();
-            }
-        };
-        rewardedAd.loadAd(adRequest, adLoadCallback);
+        rewardedAd = createAndLoadRewardedAd();
 
         rewardButton.setOnClickListener(new Button.OnClickListener() {
             HintDialog rewardDialog;
@@ -139,6 +124,7 @@ public class QuizMainActivity extends AppCompatActivity {
                             rewardedAd.show(activityContext, adCallback);
                         } else {
                             Log.d("TAG", "The rewarded ad wasn't loaded yet.");
+                            rewardedAd = createAndLoadRewardedAd();
                         }
 
                     }

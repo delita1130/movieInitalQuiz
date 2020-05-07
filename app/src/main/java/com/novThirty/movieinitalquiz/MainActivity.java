@@ -9,6 +9,7 @@ import android.widget.GridView;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.RequestConfiguration;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +22,7 @@ import com.novThirty.movieinitalquiz.model.User;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 // 깃 테스트
@@ -37,24 +39,49 @@ public class MainActivity extends AppCompatActivity {
         /*Intent intent = new Intent(this, LoadingActivity.class);
         startActivity(intent);*/
 
-        gameDao = new GameDao(this);
-        gameDao.dbConnect();
-
-        loadStageList();
-
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {
             }
         });
+
+
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
+        gameDao = new GameDao(this);
+        gameDao.dbConnect();
 
-
-
+        loadStageList();
     }
+    @Override
+     public void onPause() {
+     if (mAdView != null) {
+        mAdView.pause();
+      }
+                 super.onPause();
+    }
+
+
+     /** Called when returning to the activity */
+     @Override
+     public void onResume() {
+       super.onResume();
+        if (mAdView != null) {
+            mAdView.resume();
+            }
+    }
+
+
+    /** Called before the activity is destroyed */
+    @Override
+    public void onDestroy() {
+        if (mAdView != null) {
+            mAdView.destroy();
+        }
+         super.onDestroy();
+     }
 
     private void loadStageList() {
         // get User
