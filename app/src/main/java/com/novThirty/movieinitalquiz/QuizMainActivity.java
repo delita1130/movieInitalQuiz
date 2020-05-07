@@ -52,7 +52,7 @@ public class QuizMainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz_main);
-
+//
         gameDao = new GameDao(this);
         gameDao.dbConnect();
         pointText = findViewById(R.id.pointText);
