@@ -21,7 +21,8 @@ public class GameDao {
     private DataBaseHelper dbHelper;
     private SQLiteDatabase database;
 
-    
+
+
     public static List<Movie> MovieList;
 
     public GameDao(Context context){
