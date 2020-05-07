@@ -44,7 +44,6 @@ public class QuizMainActivity extends AppCompatActivity {
     private TextView hintText4;
     private ImageButton rewardButton;
     private TextView pointText;
-    private User user;
 
     private RewardedAd rewardedAd;
     private Activity activity;
@@ -123,10 +122,10 @@ public class QuizMainActivity extends AppCompatActivity {
                                     // User earned reward.
 
 
-                                    gameDao.updatePoint( user.getPoint() + rewardPoint );
+                                    gameDao.updatePoint( GameStatus.user.getPoint() + rewardPoint );
 
-                                    user= gameDao.getUser();
-                                    Integer point = new Integer(user.getPoint());
+                                    GameStatus.user= gameDao.getUser();
+                                    Integer point = new Integer(GameStatus.user.getPoint());
                                     pointText.setText(point.toString());
                                 }
 
@@ -175,8 +174,8 @@ public class QuizMainActivity extends AppCompatActivity {
         Log.d("test :: 다음 문제2 :: " , nextMovNum + "");
         movie = gameDao.getMovie(nextMovNum);
 
-        user= gameDao.getUser();
-        Integer point = new Integer(user.getPoint());
+        GameStatus.user= gameDao.getUser();
+        Integer point = new Integer(GameStatus.user.getPoint());
         pointText.setText(point.toString());
 
         // 현재 진행 중인 문제 번호
@@ -216,8 +215,8 @@ public class QuizMainActivity extends AppCompatActivity {
                 CorrectDialog correctDialog = new CorrectDialog(QuizMainActivity.this);
                 correctDialog.callFunction(answerPoint.toString());
 
-                gameDao.updatePoint( user.getPoint() + answerPoint );
-
+                gameDao.updatePoint( GameStatus.user.getPoint() + answerPoint );
+                GameStatus.user = gameDao.getUser();
                 if(GameStatus.user.getCurrMovNum() == GameStatus.user.getDoneMovNum() + 1) {  // 진행 중인 문제를 맞추면
                     GameStatus.user.setDoneMovNum(GameStatus.user.getDoneMovNum()+1);
                     gameDao.updateDoneMovNum(GameStatus.user.getDoneMovNum());    // 완료 된 번호 db업데이트
@@ -268,13 +267,13 @@ public class QuizMainActivity extends AppCompatActivity {
 
                 positiveListener = new View.OnClickListener() {
                     public void onClick(View v) {
-                        user = gameDao.getUser();
-                        if(user.getPoint() >= hintPoint1){
+                        GameStatus.user = gameDao.getUser();
+                        if(GameStatus.user.getPoint() >= hintPoint1){
 
-                            gameDao.updatePoint( user.getPoint() - hintPoint1 );
+                            gameDao.updatePoint( GameStatus.user.getPoint() - hintPoint1 );
 
-                            user= gameDao.getUser();
-                            Integer point = new Integer(user.getPoint());
+                            GameStatus.user= gameDao.getUser();
+                            Integer point = new Integer(GameStatus.user.getPoint());
                             pointText.setText(point.toString());
 
                             hintText1.setText( movie.getMovScript() );
@@ -310,13 +309,13 @@ public class QuizMainActivity extends AppCompatActivity {
 
                 positiveListener = new View.OnClickListener() {
                     public void onClick(View v) {
-                        user = gameDao.getUser();
-                        if(user.getPoint() >= hintPoint2){
+                        GameStatus.user = gameDao.getUser();
+                        if(GameStatus.user.getPoint() >= hintPoint2){
 
-                            gameDao.updatePoint( user.getPoint() - hintPoint2 );
+                            gameDao.updatePoint( GameStatus.user.getPoint() - hintPoint2 );
 
-                            user= gameDao.getUser();
-                            Integer point = new Integer(user.getPoint());
+                            GameStatus.user= gameDao.getUser();
+                            Integer point = new Integer(GameStatus.user.getPoint());
                             pointText.setText(point.toString());
 
                             hintText2.setText(movie.getMovActor());
@@ -352,13 +351,13 @@ public class QuizMainActivity extends AppCompatActivity {
 
                 positiveListener = new View.OnClickListener() {
                     public void onClick(View v) {
-                        user = gameDao.getUser();
-                        if(user.getPoint() >= hintPoint3){
+                        GameStatus.user = gameDao.getUser();
+                        if(GameStatus.user.getPoint() >= hintPoint3){
 
-                            gameDao.updatePoint( user.getPoint() - hintPoint3 );
+                            gameDao.updatePoint( GameStatus.user.getPoint() - hintPoint3 );
                             imageHintBool[0] = true;
-                            user= gameDao.getUser();
-                            Integer point = new Integer(user.getPoint());
+                            GameStatus.user= gameDao.getUser();
+                            Integer point = new Integer(GameStatus.user.getPoint());
                             pointText.setText(point.toString());
 
                             hintDialog.dismiss();
@@ -402,13 +401,13 @@ public class QuizMainActivity extends AppCompatActivity {
 
                 positiveListener = new View.OnClickListener() {
                     public void onClick(View v) {
-                        user = gameDao.getUser();
-                        if(user.getPoint() >= hintPoint4){
+                        GameStatus.user = gameDao.getUser();
+                        if(GameStatus.user.getPoint() >= hintPoint4){
 
-                            gameDao.updatePoint( user.getPoint() - hintPoint4 );
+                            gameDao.updatePoint( GameStatus.user.getPoint() - hintPoint4 );
 
-                            user= gameDao.getUser();
-                            Integer point = new Integer(user.getPoint());
+                            GameStatus.user= gameDao.getUser();
+                            Integer point = new Integer( GameStatus.user.getPoint());
                             pointText.setText(point.toString());
 
                             hintText4.setText(movie.getMovName());
