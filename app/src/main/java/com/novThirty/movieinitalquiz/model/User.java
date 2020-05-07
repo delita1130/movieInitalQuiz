@@ -34,9 +34,7 @@ public class User {
         this.nextMovNum += 1;
     }
 
-    public int getCurrMovNum() {
-        return currMovNum;
-    }
+    public int getCurrMovNum() { return currMovNum; }
 
     public void setCurrMovNum(int currMovNum) {
         this.currMovNum = currMovNum;

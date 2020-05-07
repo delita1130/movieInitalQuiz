@@ -61,17 +61,18 @@ public class QuizMainActivity extends AppCompatActivity {
         String clickStage = intent.getStringExtra("clickStage");
         String clickFirstMovNum = intent.getStringExtra("clickFirstMovNum");
 
-        int openStage = (int)Math.floor(GameStatus.user.getDoneMovNum() / GameStatus.numOfstepPerStage);
+        int doingStage = (int)Math.floor(GameStatus.user.getDoneMovNum() / GameStatus.numOfstepPerStage);
 
-        /*if(openStage >= Integer.parseInt(clickStage)){
-            setUp(GameStatus.user.getNextMovNum());
-        }else{*/
+        if(doingStage >= Integer.parseInt(clickStage)){  // 이전 스테이지를 클릭하면 그 스테이지의 첫번째 문제를 가지고 온다.
             setUp(Integer.parseInt(clickFirstMovNum));
-        /*}*/
+            GameStatus.user.setCurrMovNum(Integer.parseInt(clickFirstMovNum));
+            Log.d("test :: 다음 문제1 :: " , clickFirstMovNum + "");
+        }else{
+            setUp(GameStatus.user.getNextMovNum());
+            GameStatus.user.setCurrMovNum(GameStatus.user.getNextMovNum());
 
-        //gameDao.updateDoneMovNum(0);
-        setUp(GameStatus.user.getDoneMovNum()+1);
 
+        }
         activity = this;
 
         rewardButton = findViewById(R.id.imageButton2);
@@ -171,6 +172,7 @@ public class QuizMainActivity extends AppCompatActivity {
         return rerewardedAd;
     }
     public void setUp(int nextMovNum){
+        Log.d("test :: 다음 문제2 :: " , nextMovNum + "");
         movie = gameDao.getMovie(nextMovNum);
 
         user= gameDao.getUser();
@@ -216,11 +218,14 @@ public class QuizMainActivity extends AppCompatActivity {
 
                 gameDao.updatePoint( user.getPoint() + answerPoint );
 
-                GameStatus.user.setDoneMovNum(GameStatus.user.getDoneMovNum()+1);
+                if(GameStatus.user.getCurrMovNum() == GameStatus.user.getDoneMovNum() + 1) {  // 진행 중인 문제를 맞추면
+                    GameStatus.user.setDoneMovNum(GameStatus.user.getDoneMovNum()+1);
+                    gameDao.updateDoneMovNum(GameStatus.user.getDoneMovNum());    // 완료 된 번호 db업데이트
 
-                gameDao.updateDoneMovNum(GameStatus.user.getDoneMovNum());    // 완료 된 번호 db업데이트 후 다음 문제를 갖고 온다.
-
-                setUp(GameStatus.user.getNextMovNum()); // 다음 문제 출력등 셋업한다.
+                    setUp(GameStatus.user.getNextMovNum()); // 다음 문제 출력
+                }else {
+                    setUp(GameStatus.user.getCurrMovNum()+1);
+                }
             }else{  // 틀렸으면..
                 IncorrectDialog incorrectDialog = new IncorrectDialog(QuizMainActivity.this);
                 incorrectDialog.callFunction(answerEdit);
