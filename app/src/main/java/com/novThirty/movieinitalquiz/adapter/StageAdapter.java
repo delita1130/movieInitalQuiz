@@ -69,13 +69,14 @@ public class StageAdapter extends BaseAdapter {
 
         // 완료 번호가 문제의 번호보다 크거나 같으면 stage을 열어 둔다.
         // 첫번째 stage는 무조건 연다. 처음 시작하면 완료번호가 0이기 때문에 열어 둔다.
-        //5 + 5 >= 10
-        final boolean flag = GameStatus.user.getDoneMovNum() + GameStatus.numOfstepPerStage >= mItemList.get(i).getMovNum();
+        //5 >= 6
+        final boolean flag = GameStatus.user.getDoneMovNum() >= mItemList.get(i).getMovNum();
 
+       /* Log.d("test :: open : ", flag + "");
         Log.d("test :: 루프 번호 : ", i + "");
         Log.d("test :: 문제 시작 번호 : ", mItemList.get(i).getMovNum() + "");
         Log.d("test :: 완료 번호 : ", GameStatus.user.getDoneMovNum() + "");
-        Log.d("test :: 스테이지 번호 : ", mItemList.get(i).getStage() + "");
+        Log.d("test :: 스테이지 번호 : ", mItemList.get(i).getStage() + "");*/
 
         if(flag) {
             mHolder.item.setImageResource(R.drawable.ic_open_stage);
@@ -89,7 +90,7 @@ public class StageAdapter extends BaseAdapter {
                 if(flag) {
                     Intent intent = new Intent(mContext, QuizMainActivity.class);
                     intent.putExtra("clickStage", mItemList.get(i).getStage());
-                    intent.putExtra("clickFirstMovNum", mItemList.get(i).getStage());
+                    intent.putExtra("clickFirstMovNum", mItemList.get(i).getMovNum() + "");
 
                     v.getContext().startActivity(intent);
                 }

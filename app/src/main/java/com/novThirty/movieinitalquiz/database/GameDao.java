@@ -61,7 +61,7 @@ public class GameDao {
                 while (cursor.moveToNext()) {
                     userCode = cursor.getString(0);
                     doneMovNum = cursor.getInt(1);
-                    currMovNum = cursor.getInt(2);
+                    //currMovNum = cursor.getInt(2);
                     point = cursor.getInt(3);
                 }
 
@@ -92,12 +92,11 @@ public class GameDao {
                     "                   stage, " +
                     "                   step " +
                     "           FROM    xb_movie " +
-                    "           ORDER BY step ASC" +
+                    "           ORDER BY step DESC" +
                     "       ) ta " +
                     "       GROUP BY stage";
 
             try {
-
                 Cursor cursor = database.rawQuery(sql, null);
 
                 int movNum = 0;
@@ -114,7 +113,6 @@ public class GameDao {
                     Movie movie = new Movie(movNum, movName, stage);
                     list.add(movie);
                 }
-
 
             }catch (Exception e){
                 e.printStackTrace();

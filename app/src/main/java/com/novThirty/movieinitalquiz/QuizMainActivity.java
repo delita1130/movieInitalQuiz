@@ -44,16 +44,22 @@ public class QuizMainActivity extends AppCompatActivity {
         String clickStage = intent.getStringExtra("clickStage");
         String clickFirstMovNum = intent.getStringExtra("clickFirstMovNum");
 
-        int openStage = (int)Math.floor(GameStatus.user.getDoneMovNum() / GameStatus.numOfstepPerStage);
+        int doingStage = (int)Math.floor(GameStatus.user.getDoneMovNum() / GameStatus.numOfstepPerStage);
 
-        /*if(openStage >= Integer.parseInt(clickStage)){
-            setUp(GameStatus.user.getNextMovNum());
-        }else{*/
+        if(doingStage >= Integer.parseInt(clickStage)){  // 이전 스테이지를 클릭하면 그 스테이지의 첫번째 문제를 가지고 온다.
             setUp(Integer.parseInt(clickFirstMovNum));
-        /*}*/
+            GameStatus.user.setCurrMovNum(Integer.parseInt(clickFirstMovNum));
+            Log.d("test :: 다음 문제1 :: " , clickFirstMovNum + "");
+        }else{
+            setUp(GameStatus.user.getNextMovNum());
+            GameStatus.user.setCurrMovNum(GameStatus.user.getNextMovNum());
+
+
+        }
     }
 
     public void setUp(int nextMovNum){
+        Log.d("test :: 다음 문제2 :: " , nextMovNum + "");
         movie = gameDao.getMovie(nextMovNum);
 
         // 현재 진행 중인 문제 번호
@@ -91,11 +97,15 @@ public class QuizMainActivity extends AppCompatActivity {
             // 정답이면..
             if(answerEdit.getText().toString().trim().equals(movie.getMovName().trim())){
                 CorrectDialog incorrectDialog = new CorrectDialog(QuizMainActivity.this);
-                GameStatus.user.setDoneMovNum(GameStatus.user.getDoneMovNum()+1);
 
-                gameDao.updateDoneMovNum(GameStatus.user.getDoneMovNum());    // 완료 된 번호 db업데이트 후 다음 문제를 갖고 온다.
+                if(GameStatus.user.getCurrMovNum() == GameStatus.user.getDoneMovNum() + 1) {  // 진행 중인 문제를 맞추면
+                    GameStatus.user.setDoneMovNum(GameStatus.user.getDoneMovNum()+1);
+                    gameDao.updateDoneMovNum(GameStatus.user.getDoneMovNum());    // 완료 된 번호 db업데이트
 
-                setUp(GameStatus.user.getNextMovNum()); // 다음 문제 출력등 셋업한다.
+                    setUp(GameStatus.user.getNextMovNum()); // 다음 문제 출력
+                }else {
+                    setUp(GameStatus.user.getCurrMovNum()+1);
+                }
             }else{  // 틀렸으면..
                 IncorrectDialog incorrectDialog = new IncorrectDialog(QuizMainActivity.this);
                 incorrectDialog.callFunction(answerEdit);
