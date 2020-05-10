@@ -39,7 +39,7 @@ public class StageAdapter extends BaseAdapter {
     @Override
     public int getCount() {
         if(mItemList.size()>0) {
-            return mItemList.size();
+            return mItemList.size()-1;
         }
         return 0;
     }
@@ -72,12 +72,6 @@ public class StageAdapter extends BaseAdapter {
         //5 >= 6
         final boolean flag = GameStatus.user.getDoneMovNum()+1 >= mItemList.get(i).getMovNum();
 
-        Log.d("test :: open : ", flag + "");
-        Log.d("test :: 루프 번호 : ", i + "");
-       /* Log.d("test :: 문제 시작 번호 : ", mItemList.get(i).getMovNum() + "");
-        Log.d("test :: 완료 번호 : ", GameStatus.user.getDoneMovNum() + "");
-        Log.d("test :: 스테이지 번호 : ", mItemList.get(i).getStage() + "");*/
-
         if(flag) {
             mHolder.item.setImageResource(R.drawable.ic_open_stage);
         }else {
@@ -87,15 +81,13 @@ public class StageAdapter extends BaseAdapter {
         mHolder.item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(flag) {
-                    Intent intent = new Intent(mContext, QuizMainActivity.class);
-                    intent.putExtra("clickStage", mItemList.get(i).getStage());
-                    intent.putExtra("clickFirstMovNum", mItemList.get(i).getMovNum() + "");
+            if(flag) {
+                Intent intent = new Intent(mContext, QuizMainActivity.class);
+                intent.putExtra("clickStage", mItemList.get(i).getStage());
+                intent.putExtra("clickFirstMovNum", mItemList.get(i).getMovNum() + "");
 
-                    v.getContext().startActivity(intent);
-                }
-
-                Log.d("test :: 선택 ", "" + mItemList.get(i).getMovNum());
+                v.getContext().startActivity(intent);
+            }
             }
         });
 

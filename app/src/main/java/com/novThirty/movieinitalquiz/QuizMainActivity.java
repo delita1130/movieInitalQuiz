@@ -62,9 +62,6 @@ public class QuizMainActivity extends AppCompatActivity {
 
         int doingStage = (int)Math.floor(GameStatus.user.getDoneMovNum() / GameStatus.numOfstepPerStage)+1;
 
-        Log.d("test :: 진행중인스테이지 :: " ,  doingStage + "");
-        Log.d("test :: 클릭한스테이 :: " ,  clickStage + "");
-
         if(doingStage == Integer.parseInt(clickStage)){  // 진행중인문제
             setUp(GameStatus.user.getNextMovNum());
             GameStatus.user.setCurrMovNum(GameStatus.user.getNextMovNum());
@@ -72,10 +69,10 @@ public class QuizMainActivity extends AppCompatActivity {
         }else{  // 진행했던문제
             setUp(Integer.parseInt(clickFirstMovNum));
             GameStatus.user.setCurrMovNum(Integer.parseInt(clickFirstMovNum));
-            Log.d("test :: 진행했던스테이 :: " , clickFirstMovNum + "");
+
         }
 
-        activity = this;
+        /*activity = this;
 
         rewardButton = findViewById(R.id.imageButton2);
 
@@ -140,7 +137,7 @@ public class QuizMainActivity extends AppCompatActivity {
                 rewardDialog.callFunction("보상광고를 보시겠습니까?", rewardPoint.toString());
 
             }
-        });
+        });*/
     }
     public RewardedAd createAndLoadRewardedAd() {
         RewardedAd rerewardedAd = new RewardedAd(this,
