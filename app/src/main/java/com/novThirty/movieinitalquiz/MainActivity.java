@@ -70,7 +70,8 @@ public class MainActivity extends AppCompatActivity {
        super.onResume();
         if (mAdView != null) {
             mAdView.resume();
-            }
+            loadStageList();
+        }
     }
 
 
@@ -94,5 +95,6 @@ public class MainActivity extends AppCompatActivity {
         StageAdapter adapter = new StageAdapter(this, movieList);
         gridView = findViewById(R.id.gridView);
         gridView.setAdapter(adapter);
+
     }
 }
