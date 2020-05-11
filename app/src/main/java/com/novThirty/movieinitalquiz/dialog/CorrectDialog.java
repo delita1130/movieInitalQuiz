@@ -40,7 +40,7 @@ public class CorrectDialog {
             layout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    dlg.cancel();
                 }
             });
 

@@ -201,7 +201,6 @@ public class QuizMainActivity extends AppCompatActivity {
                     CorrectDialog correctDialog = new CorrectDialog(QuizMainActivity.this);
 
                     if(GameStatus.user.getCurrMovNum() == GameStatus.user.getDoneMovNum()+1) {  // 진행 중인 문제를 맞추면
-                        Log.d("test :: 진행중인문제", "입니다.");
                         GameStatus.user.setDoneMovNum(GameStatus.user.getDoneMovNum()+1);
                         gameDao.updateDoneMovNum(GameStatus.user.getDoneMovNum());    // 완료 된 번호 db업데이트
 
@@ -212,9 +211,9 @@ public class QuizMainActivity extends AppCompatActivity {
 
                         setUp(GameStatus.user.getNextMovNum()); // 다음 문제 출력
                     }else {
-                        Log.d("test :: 진행했던문", "입니다.");
                         GameStatus.user.setCurrMovNum(GameStatus.user.getCurrMovNum()+1);
                         gameDao.updateCurrMovNum(GameStatus.user.getCurrMovNum());    // 완료 된 번호 db업데이트
+
                         correctDialog.callFunction("0");
 
                         setUp(GameStatus.user.getCurrMovNum());

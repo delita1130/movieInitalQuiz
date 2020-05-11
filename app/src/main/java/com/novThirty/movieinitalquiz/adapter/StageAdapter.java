@@ -69,7 +69,7 @@ public class StageAdapter extends BaseAdapter {
 
         // 완료 번호가 문제의 번호보다 크거나 같으면 stage을 열어 둔다.
         // 첫번째 stage는 무조건 연다. 처음 시작하면 완료번호가 0이기 때문에 열어 둔다.
-        //5 >= 6
+        //5(완료번호) + 1 >= 6(현재번호)
         final boolean flag = GameStatus.user.getDoneMovNum()+1 >= mItemList.get(i).getMovNum();
 
         if(flag) {
