@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.novThirty.movieinitalquiz.R;
+import com.novThirty.movieinitalquiz.config.GameStatus;
 import com.novThirty.movieinitalquiz.database.GameDao;
 
 public class HintDialog{
@@ -55,7 +56,6 @@ public class HintDialog{
             layout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
                 }
             });
 

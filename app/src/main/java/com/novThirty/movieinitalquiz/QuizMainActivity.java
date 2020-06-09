@@ -47,8 +47,7 @@ public class QuizMainActivity extends AppCompatActivity {
 
     private RewardedAd rewardedAd;
     private Activity activity;
-    private boolean readyAd;
-
+    private boolean readyAd = false;
     HintDialog rewardDialog;
     final Integer rewardPoint  = new Integer(GameStatus.movRewardPoint);
 
@@ -89,22 +88,19 @@ public class QuizMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-               // rewardedAd = createAndLoadRewardedAd();
-
                 View.OnClickListener positiveListener;
                 View.OnClickListener negativeListener;
 
                 positiveListener = new View.OnClickListener() {
                     public void onClick(View v) {
-
                         readyAd = true;
                         rewardedAd = createAndLoadRewardedAd();
-
                     }
                 };
 
                 negativeListener = new View.OnClickListener() {
                     public void onClick(View v) {
+                        readyAd = false;
                         rewardDialog.dismiss();
                     }
                 };
@@ -117,15 +113,18 @@ public class QuizMainActivity extends AppCompatActivity {
     }
     public RewardedAd createAndLoadRewardedAd() {
 
-        RewardedAd rerewardedAd = new RewardedAd(this,
+       final RewardedAd rerewardedAd = new RewardedAd(this,
                 "ca-app-pub-3940256099942544/5224354917");
         RewardedAdLoadCallback adLoadCallback = new RewardedAdLoadCallback() {
             @Override
             public void onRewardedAdLoaded() {
                 // Ad successfully loaded.
+
                 if (readyAd == true) {
+                    Log.d("readyAd", "true");
                     Activity activityContext = activity ;
                     readyAd = false;
+
                     RewardedAdCallback adCallback = new RewardedAdCallback() {
                         public void onRewardedAdOpened() {
 
@@ -159,6 +158,7 @@ public class QuizMainActivity extends AppCompatActivity {
 
             @Override
             public void onRewardedAdFailedToLoad(int errorCode) {
+                readyAd = true;
                 rewardedAd = createAndLoadRewardedAd();
             }
         };
@@ -293,9 +293,12 @@ public class QuizMainActivity extends AppCompatActivity {
                         hintDialog.dismiss();
                     }
                 };
-                if( hintText1.getText() == "" ) {
+
+                if( hintText1.getText() == "" && GameStatus.user.getPoint() >= hintPoint1) {
                     hintDialog = new HintDialog(QuizMainActivity.this, positiveListener, negativeListener);
                     hintDialog.callFunction("명대사힌트를 보시겠습니까?", hintPoint1.toString());
+                }else{
+
                 }
             }
         });
@@ -335,7 +338,7 @@ public class QuizMainActivity extends AppCompatActivity {
                         hintDialog.dismiss();
                     }
                 };
-                if( hintText2.getText() == "" ) {
+                if( hintText2.getText() == "" && GameStatus.user.getPoint() >= hintPoint2 ) {
                     hintDialog = new HintDialog(QuizMainActivity.this, positiveListener, negativeListener);
                     hintDialog.callFunction("출연자힌트를 보시겠습니까?", hintPoint2.toString());
                 }
@@ -380,7 +383,7 @@ public class QuizMainActivity extends AppCompatActivity {
                         hintDialog.dismiss();
                     }
                 };
-                if( hintText3.getText() == "" ) {
+                if( hintText3.getText() == "" && GameStatus.user.getPoint() >= hintPoint3 ) {
                     hintDialog = new HintDialog(QuizMainActivity.this, positiveListener, negativeListener);
                     hintDialog.callFunction("사진힌트를 보시겠습니까?", hintPoint3.toString());
 
@@ -427,7 +430,7 @@ public class QuizMainActivity extends AppCompatActivity {
                         hintDialog.dismiss();
                     }
                 };
-                if( hintText4.getText() == "" ) {
+                if( hintText4.getText() == "" && GameStatus.user.getPoint() >= hintPoint4) {
                     hintDialog = new HintDialog(QuizMainActivity.this, positiveListener, negativeListener);
                     hintDialog.callFunction("정답을 보시겠습니까?", hintPoint4.toString());
                 }
