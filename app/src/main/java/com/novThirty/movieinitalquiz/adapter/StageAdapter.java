@@ -2,7 +2,6 @@ package com.novThirty.movieinitalquiz.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +13,7 @@ import com.novThirty.movieinitalquiz.QuizMainActivity;
 import com.novThirty.movieinitalquiz.R;
 import com.novThirty.movieinitalquiz.config.GameStatus;
 import com.novThirty.movieinitalquiz.model.Movie;
-import com.novThirty.movieinitalquiz.model.User;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.List;
 
 public class StageAdapter extends BaseAdapter {
@@ -60,7 +56,7 @@ public class StageAdapter extends BaseAdapter {
             convertView = mInflater.inflate(R.layout.item_stage, parent, false);
             mHolder = new ViewHolder();
             mHolder.item = convertView.findViewById(R.id.stageBtn);
-            mHolder.item.setLayoutParams(new LinearLayout.LayoutParams(450, 500));
+            //mHolder.item.setLayoutParams(new LinearLayout.LayoutParams(350, 379));
 
             convertView.setTag(mHolder);
         }else {
@@ -73,9 +69,9 @@ public class StageAdapter extends BaseAdapter {
         final boolean flag = GameStatus.user.getDoneMovNum()+1 >= mItemList.get(i).getMovNum();
 
         if(flag) {
-            mHolder.item.setImageResource(R.drawable.ic_open_stage);
+            mHolder.item.setImageResource(R.drawable.ic_open_stage3);
         }else {
-            mHolder.item.setImageResource(R.drawable.ic_lock_stage);
+            mHolder.item.setImageResource(R.drawable.ic_lock_stage3);
         }
 
         mHolder.item.setOnClickListener(new View.OnClickListener() {

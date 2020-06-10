@@ -1,5 +1,6 @@
 package com.novThirty.movieinitalquiz;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -97,4 +98,5 @@ public class MainActivity extends AppCompatActivity {
         gridView.setAdapter(adapter);
 
     }
+
 }

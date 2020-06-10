@@ -7,17 +7,16 @@
     <GridView
         android:id="@+id/gridView"
         android:layout_width="match_parent"
-        android:layout_height="678dp"
+        android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_marginStart="0dp"
-        android:columnWidth="@dimen/width"
+        android:columnWidth="10dp"
         android:gravity="center"
         android:horizontalSpacing="10dp"
         android:numColumns="3"
         android:padding="10dp"
         android:stretchMode="columnWidth"
-        android:verticalSpacing="10dp" >
-
+        android:verticalSpacing="5dp" >
     </GridView>
 
     <com.google.android.gms.ads.AdView
