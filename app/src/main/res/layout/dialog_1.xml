@@ -4,7 +4,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:background="@color/colorPrimary"
+    android:background="#ff8ca0"
     android:id="@+id/okLayout">
     <LinearLayout
         android:layout_width="300dp"
@@ -56,7 +56,7 @@
                 android:id="@+id/OKButton"
                 android:layout_width="150dp"
                 android:layout_height="60dp"
-                android:background="@color/colorPrimaryDark"
+                android:background="#ff466e"
                 android:text="확인">
 
             </Button>
@@ -64,7 +64,7 @@
                 android:id="@+id/CancelButton"
                 android:layout_width="150dp"
                 android:layout_height="60dp"
-                android:background="@color/colorPrimaryDark"
+                android:background="#ff466e"
                 android:text="취소">
             </Button>
         </LinearLayout>

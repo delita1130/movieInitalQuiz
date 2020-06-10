@@ -2,6 +2,7 @@ package com.novThirty.movieinitalquiz;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -50,6 +51,11 @@ public class QuizMainActivity extends AppCompatActivity {
     private boolean readyAd = false;
     HintDialog rewardDialog;
     final Integer rewardPoint  = new Integer(GameStatus.movRewardPoint);
+
+    final Integer hintPoint1 = new Integer(GameStatus.movScriptHintPoint);
+    final Integer hintPoint2 = new Integer(GameStatus.movActorHintPoint);
+    final Integer hintPoint3 = new Integer(GameStatus.movImgHintPoint);
+    final Integer hintPoint4 = new Integer(GameStatus.movNameHintPoint);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,6 +150,9 @@ public class QuizMainActivity extends AppCompatActivity {
                             GameStatus.user= gameDao.getUser();
                             Integer point = new Integer(GameStatus.user.getPoint());
                             pointText.setText(point.toString());
+
+                            hintButtonConfirm();
+
                         }
 
                         public void onRewardedAdFailedToShow(int errorCode) {
@@ -234,9 +243,31 @@ public class QuizMainActivity extends AppCompatActivity {
             }
         });
     }
-
+    public void hintButtonConfirm(){
+        if(hintText1.getText() == "" && GameStatus.user.getPoint() >= hintPoint1){
+            hintBtn1.setBackground(this.getResources().getDrawable(R.drawable.btn_bg));
+        }else {
+            hintBtn1.setBackground(this.getResources().getDrawable(R.drawable.disabled_btn_bg));
+        }
+        if(hintText2.getText() == "" && GameStatus.user.getPoint() >= hintPoint2){
+            hintBtn2.setBackground(this.getResources().getDrawable(R.drawable.btn_bg));
+        }else {
+            hintBtn2.setBackground(this.getResources().getDrawable(R.drawable.disabled_btn_bg));
+        }
+        if(hintText3.getText() == "" && GameStatus.user.getPoint() < hintPoint3){
+            hintBtn3.setBackground(this.getResources().getDrawable(R.drawable.disabled_btn_bg));
+        }else {
+            hintBtn3.setBackground(this.getResources().getDrawable(R.drawable.btn_bg));
+        }
+        if(hintText4.getText() == "" && GameStatus.user.getPoint() >= hintPoint4){
+            hintBtn4.setBackground(this.getResources().getDrawable(R.drawable.btn_bg));
+        }else {
+            hintBtn4.setBackground(this.getResources().getDrawable(R.drawable.disabled_btn_bg));
+        }
+    }
     // 힌트 버튼들
     public void hintButton(){
+
         hintBtn1 = findViewById(R.id.hintBtn1);
         hintBtn2 = findViewById(R.id.hintBtn2);
         hintBtn3 = findViewById(R.id.hintBtn3);
@@ -252,10 +283,7 @@ public class QuizMainActivity extends AppCompatActivity {
         hintText3.setText("");
         hintText4.setText("");
 
-        final Integer hintPoint1 = new Integer(GameStatus.movScriptHintPoint);
-        final Integer hintPoint2 = new Integer(GameStatus.movActorHintPoint);
-        final Integer hintPoint3 = new Integer(GameStatus.movImgHintPoint);
-        final Integer hintPoint4 = new Integer(GameStatus.movNameHintPoint);
+        hintButtonConfirm();
 
         final boolean[] imageHintBool = {false};
         // 힌트1
@@ -269,6 +297,7 @@ public class QuizMainActivity extends AppCompatActivity {
 
                 positiveListener = new View.OnClickListener() {
                     public void onClick(View v) {
+
                         GameStatus.user = gameDao.getUser();
                         if(GameStatus.user.getPoint() >= hintPoint1){
 
@@ -279,6 +308,8 @@ public class QuizMainActivity extends AppCompatActivity {
                             pointText.setText(point.toString());
 
                             hintText1.setText( movie.getMovScript() );
+                            hintButtonConfirm();
+
                             hintDialog.dismiss();
 
                         }else{
@@ -324,6 +355,7 @@ public class QuizMainActivity extends AppCompatActivity {
                             pointText.setText(point.toString());
 
                             hintText2.setText(movie.getMovActor());
+                            hintButtonConfirm();
                             hintDialog.dismiss();
 
                         }else{
@@ -370,7 +402,7 @@ public class QuizMainActivity extends AppCompatActivity {
                             HintImageDialog hintImageDialog = new HintImageDialog(QuizMainActivity.this);
                             hintImageDialog.callFunction(movie.getMovImgPath());
                             hintText3.setText(movie.getMovImgPath());
-
+                            hintButtonConfirm();
                         }else{
                             hintDialog.dismiss();
                         }
@@ -416,6 +448,7 @@ public class QuizMainActivity extends AppCompatActivity {
                             pointText.setText(point.toString());
 
                             hintText4.setText(movie.getMovName());
+                            hintButtonConfirm();
                             hintDialog.dismiss();
 
                         }else{
