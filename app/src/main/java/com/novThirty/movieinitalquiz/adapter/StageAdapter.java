@@ -56,7 +56,9 @@ public class StageAdapter extends BaseAdapter {
             convertView = mInflater.inflate(R.layout.item_stage, parent, false);
             mHolder = new ViewHolder();
             mHolder.item = convertView.findViewById(R.id.stageBtn);
-            //mHolder.item.setLayoutParams(new LinearLayout.LayoutParams(350, 379));
+            //mHolder.item.setLayoutParams(new LinearLayout.LayoutParams(400, 480));
+            mHolder.item.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            mHolder.item.setAdjustViewBounds(true);
 
             convertView.setTag(mHolder);
         }else {
