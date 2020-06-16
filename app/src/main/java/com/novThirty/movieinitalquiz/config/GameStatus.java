@@ -12,5 +12,5 @@ public class GameStatus {
     public static int movNameHintPoint = 50;
 
     public static int movAnswerPoint = 100;
-    public static int movRewardPoint = 50;
+    public static int movRewardPoint = 1000;
 }

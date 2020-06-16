@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -246,23 +247,47 @@ public class QuizMainActivity extends AppCompatActivity {
     public void hintButtonConfirm(){
         if(hintText1.getText() == "" && GameStatus.user.getPoint() >= hintPoint1){
             hintBtn1.setBackground(this.getResources().getDrawable(R.drawable.btn_bg));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                hintBtn1.setForeground(this.getResources().getDrawable(R.drawable.talkbox_icon_white_resize_point));
+            }
         }else {
             hintBtn1.setBackground(this.getResources().getDrawable(R.drawable.disabled_btn_bg));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                hintBtn1.setForeground(this.getResources().getDrawable(R.drawable.talkbox_icon_white_resize));
+            }
         }
         if(hintText2.getText() == "" && GameStatus.user.getPoint() >= hintPoint2){
             hintBtn2.setBackground(this.getResources().getDrawable(R.drawable.btn_bg));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                hintBtn2.setForeground(this.getResources().getDrawable(R.drawable.actor_icon_white_resize_point));
+            }
         }else {
             hintBtn2.setBackground(this.getResources().getDrawable(R.drawable.disabled_btn_bg));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                hintBtn2.setForeground(this.getResources().getDrawable(R.drawable.actor_icon_white_resize));
+            }
         }
         if(hintText3.getText() == "" && GameStatus.user.getPoint() < hintPoint3){
             hintBtn3.setBackground(this.getResources().getDrawable(R.drawable.disabled_btn_bg));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                hintBtn3.setForeground(this.getResources().getDrawable(R.drawable.picture_icon_white_resize_point));
+            }
         }else {
             hintBtn3.setBackground(this.getResources().getDrawable(R.drawable.btn_bg));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                hintBtn3.setForeground(this.getResources().getDrawable(R.drawable.picture_icon_white_resize_point));
+            }
         }
         if(hintText4.getText() == "" && GameStatus.user.getPoint() >= hintPoint4){
             hintBtn4.setBackground(this.getResources().getDrawable(R.drawable.btn_bg));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                hintBtn4.setForeground(this.getResources().getDrawable(R.drawable.movie_icon_white_resize_point));
+            }
         }else {
             hintBtn4.setBackground(this.getResources().getDrawable(R.drawable.disabled_btn_bg));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                hintBtn4.setForeground(this.getResources().getDrawable(R.drawable.movie_icon_white_resize));
+            }
         }
     }
     // 힌트 버튼들

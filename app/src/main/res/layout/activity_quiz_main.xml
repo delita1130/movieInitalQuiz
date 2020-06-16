@@ -9,9 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="67dp"
-        android:layout_marginTop="15dp"
-        android:background="#ff466e"
-        >
+        android:background="#ff466e">
 
         <ImageButton
             android:id="@+id/backButton"
@@ -45,7 +43,7 @@
             android:id="@+id/imageView"
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:foreground="@drawable/coin_icon_white_resize"
+            android:foreground="@drawable/coin_icon_white_resize_point"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.283"
@@ -57,14 +55,13 @@
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:background="#00FFFFFF"
-            android:foreground="@drawable/charge_icon_white_resize"
+            android:foreground="@drawable/charge_icon_white_resize_point"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.892"
             app:layout_constraintStart_toEndOf="@+id/pointText"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.416"
-            />
+            app:layout_constraintVertical_bias="0.416" />
 
         <TextView
             android:id="@+id/pointText"
@@ -99,43 +96,43 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="77dp"
+        android:layout_height="150dp"
         android:layout_marginTop="20dp"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:background="@drawable/movie_txt_stroke"
-            android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/ticket_new_yellow"
             android:elevation="10dp"
+            android:gravity="center_vertical"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/quizText"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="7dp"
-                android:layout_marginLeft="7dp"
-                android:layout_marginTop="7dp"
-                android:layout_marginEnd="7dp"
-                android:layout_marginRight="7dp"
-                android:layout_marginBottom="7dp"
+                android:layout_width="184dp"
+                android:layout_height="46dp"
+                android:layout_margin="20dp"
                 android:layout_weight="1"
-                android:background="@drawable/movie_txt_bg"
                 android:gravity="center_vertical"
                 android:textAlignment="center"
-                android:textColor="#000000"
-                android:textSize="40dp"
-                android:textStyle="bold" />
-        </LinearLayout>
+                android:textColor="#7c2c26"
+                android:textStyle="bold"
+
+                app:autoSizeTextType="uniform"
+                app:autoSizeMinTextSize="12sp"
+                app:autoSizeMaxTextSize="100sp"
+                app:autoSizeStepGranularity="2sp"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.298" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -150,7 +147,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@drawable/text_bg"
+            android:background="@drawable/answer_stroke"
 
             android:gravity="center_vertical"
             android:orientation="vertical">
@@ -221,7 +218,7 @@
                     android:layout_marginRight="7dp"
                     android:layout_marginBottom="7dp"
                     android:background="@drawable/btn_bg"
-                    android:foreground="@drawable/talkbox_icon_white_resize"
+                    android:foreground="@drawable/talkbox_icon_white_resize_point"
                     android:gravity="center_vertical"
                     android:padding="5dp"
                     android:textAlignment="center"
@@ -247,6 +244,12 @@
                     android:layout_marginEnd="7dp"
                     android:layout_marginRight="7dp"
                     android:layout_marginBottom="7dp"
+
+                    app:autoSizeTextType="uniform"
+                    app:autoSizeMinTextSize="10sp"
+                    app:autoSizeMaxTextSize="14sp"
+                    app:autoSizeStepGranularity="2sp"
+
                     android:background="@drawable/text_bg"
                     android:gravity="center_vertical"
                     android:textAlignment="center" />
@@ -280,7 +283,7 @@
                     android:layout_marginRight="7dp"
                     android:layout_marginBottom="7dp"
                     android:background="@drawable/btn_bg"
-                    android:foreground="@drawable/actor_icon_white_resize"
+                    android:foreground="@drawable/actor_icon_white_resize_point"
                     android:elevation="10dp"
                     android:gravity="center_vertical"
                     android:textAlignment="center"
@@ -308,6 +311,12 @@
                     android:layout_marginEnd="7dp"
                     android:layout_marginRight="7dp"
                     android:layout_marginBottom="7dp"
+
+                    app:autoSizeTextType="uniform"
+                    app:autoSizeMinTextSize="10sp"
+                    app:autoSizeMaxTextSize="14sp"
+                    app:autoSizeStepGranularity="2sp"
+
                     android:background="@drawable/text_bg"
                     android:gravity="center_vertical"
                     android:textAlignment="center" />
@@ -342,7 +351,7 @@
                     android:layout_marginRight="7dp"
                     android:layout_marginBottom="7dp"
                     android:background="@drawable/btn_bg"
-                    android:foreground="@drawable/picture_icon_white_resize"
+                    android:foreground="@drawable/picture_icon_white_resize_point"
                     android:elevation="10dp"
                     android:gravity="center_vertical"
                     android:textAlignment="center"
@@ -372,7 +381,9 @@
                     android:layout_marginBottom="7dp"
                     android:background="@drawable/text_bg"
                     android:gravity="center_vertical"
-                    android:textAlignment="center" />
+                    android:textAlignment="center"
+                    android:textColor="#f5f5f5"
+                    />
             </LinearLayout>
         </LinearLayout>
 
@@ -403,7 +414,7 @@
                     android:layout_marginRight="7dp"
                     android:layout_marginBottom="7dp"
                     android:background="@drawable/btn_bg"
-                    android:foreground="@drawable/movie_icon_white_resize"
+                    android:foreground="@drawable/movie_icon_white_resize_point"
                     android:elevation="10dp"
                     android:gravity="center_vertical"
                     android:textAlignment="center"
