@@ -71,9 +71,9 @@ public class StageAdapter extends BaseAdapter {
         final boolean flag = GameStatus.user.getDoneMovNum()+1 >= mItemList.get(i).getMovNum();
 
         if(flag) {
-            mHolder.item.setImageResource(R.drawable.ic_open_stage4);
+            mHolder.item.setImageResource(R.drawable.ic_open_stage3);
         }else {
-            mHolder.item.setImageResource(R.drawable.ic_lock_stage4);
+            mHolder.item.setImageResource(R.drawable.ic_lock_stage3);
         }
 
         mHolder.item.setOnClickListener(new View.OnClickListener() {
