@@ -1,16 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:ads="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#e6f0fa">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="67dp"
+        android:background="#ff466e"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@android:color/white"
+            android:text="단계목록"
+            android:textSize="25dp"
+            android:textStyle="normal"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="20dp"/>
+    </LinearLayout>
 
     <GridView
         android:id="@+id/gridView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:numColumns="3">
+        android:numColumns="3"
+        android:background="#e6f0fa">
     </GridView>
 
     <com.google.android.gms.ads.AdView
@@ -22,4 +41,4 @@
         ads:adSize="BANNER"
         ads:adUnitId="ca-app-pub-3940256099942544/6300978111"></com.google.android.gms.ads.AdView>
 
-</RelativeLayout>
+</LinearLayout>
