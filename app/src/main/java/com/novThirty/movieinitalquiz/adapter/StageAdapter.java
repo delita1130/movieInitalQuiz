@@ -82,7 +82,7 @@ public class StageAdapter extends BaseAdapter {
             if(flag) {
                 Intent intent = new Intent(mContext, QuizMainActivity.class);
                 intent.putExtra("clickStage", mItemList.get(i).getStage());
-                intent.putExtra("clickFirstMovNum", mItemList.get(i).getMovNum() + "");
+                intent.putExtra("clickFirstMovNum", mItemList.get(i).getMovNum() +  "");
 
                 v.getContext().startActivity(intent);
             }

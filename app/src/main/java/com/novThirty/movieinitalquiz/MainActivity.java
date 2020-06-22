@@ -11,7 +11,6 @@ import android.widget.GridView;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.RequestConfiguration;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,9 +21,6 @@ import com.novThirty.movieinitalquiz.database.GameDao;
 import com.novThirty.movieinitalquiz.model.Movie;
 import com.novThirty.movieinitalquiz.model.User;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 // 깃 테스트
@@ -44,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
             public void onInitializationComplete(InitializationStatus initializationStatus) {
             }
         });
-
 
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
@@ -85,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
      }
 
     private void loadStageList() {
+        //gameDao.updateUser(); // dummy
         // get User
         User getUser = GameStatus.user;
         GameStatus.user = getUser;

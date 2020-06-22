@@ -1,6 +1,7 @@
 package com.novThirty.movieinitalquiz;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -24,6 +25,7 @@ import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
 import com.novThirty.movieinitalquiz.config.GameStatus;
 import com.novThirty.movieinitalquiz.database.GameDao;
 import com.novThirty.movieinitalquiz.dialog.CorrectDialog;
+import com.novThirty.movieinitalquiz.dialog.DefaultDialog;
 import com.novThirty.movieinitalquiz.dialog.HintDialog;
 import com.novThirty.movieinitalquiz.dialog.HintImageDialog;
 import com.novThirty.movieinitalquiz.dialog.IncorrectDialog;
@@ -76,7 +78,6 @@ public class QuizMainActivity extends AppCompatActivity {
         if(doingStage == Integer.parseInt(clickStage)){  // 진행중인문제
             setUp(GameStatus.user.getNextMovNum());
             GameStatus.user.setCurrMovNum(GameStatus.user.getNextMovNum());
-            Log.d("test :: 진행중인스테이지 :: " ,  GameStatus.user.getNextMovNum() + "");
         }else{  // 진행했던문제
             setUp(Integer.parseInt(clickFirstMovNum));
             GameStatus.user.setCurrMovNum(Integer.parseInt(clickFirstMovNum));
@@ -179,7 +180,11 @@ public class QuizMainActivity extends AppCompatActivity {
     public void setUp(int nextMovNum){
         gameDao.updateCurrMovNum(nextMovNum);
 
-        Log.d("test :: 진행 문제 :: " , nextMovNum + ", " + gameDao.getUser().getDoneMovNum());
+        if(nextMovNum > 500){
+
+            return;
+        }
+
         movie = gameDao.getMovie(nextMovNum);
 
         GameStatus.user= gameDao.getUser();
@@ -221,29 +226,60 @@ public class QuizMainActivity extends AppCompatActivity {
 
                     if(GameStatus.user.getCurrMovNum() == GameStatus.user.getDoneMovNum()+1) {  // 진행 중인 문제를 맞추면
                         GameStatus.user.setDoneMovNum(GameStatus.user.getDoneMovNum()+1);
+
                         gameDao.updateDoneMovNum(GameStatus.user.getDoneMovNum());    // 완료 된 번호 db업데이트
 
-                        correctDialog.callFunction(answerPoint.toString());
+                        gameDao.updatePoint( GameStatus.user.getPoint() + answerPoint );    // 포인트 업데이트
 
-                        gameDao.updatePoint( GameStatus.user.getPoint() + answerPoint );
+                        nextQuiz(GameStatus.user.getNextMovNum()); // 다음 문제 출력
+
+                        correctDialog.callFunction(answerPoint.toString()); // 포인트 다이얼로그 출력
+
                         GameStatus.user = gameDao.getUser();
 
-                        setUp(GameStatus.user.getNextMovNum()); // 다음 문제 출력
-                    }else {
+                    }else { // 이전에 정답을 맞춘 문제이면..
+                        Log.d("test :: ", gameDao.getUser().getCurrMovNum() + "");
                         GameStatus.user.setCurrMovNum(GameStatus.user.getCurrMovNum()+1);
+
+                        nextQuiz(GameStatus.user.getCurrMovNum());
+
                         gameDao.updateCurrMovNum(GameStatus.user.getCurrMovNum());    // 완료 된 번호 db업데이트
 
                         correctDialog.callFunction("0");
 
-                        setUp(GameStatus.user.getCurrMovNum());
                     }
                 }else{  // 틀렸으면..
                     IncorrectDialog incorrectDialog = new IncorrectDialog(QuizMainActivity.this);
                     incorrectDialog.callFunction(answerEdit);
                 }
+
             }
         });
     }
+
+    DefaultDialog lastQuizeDialog;
+
+    public void nextQuiz(int nextMovNum){
+
+        if(nextMovNum > 500){
+            View.OnClickListener positiveListener;
+
+            positiveListener = new View.OnClickListener() {
+                public void onClick(View v) {
+                    lastQuizeDialog.dismiss();
+                    onBackPressed();
+                }
+            };
+
+            lastQuizeDialog = new DefaultDialog(QuizMainActivity.this, positiveListener);
+            lastQuizeDialog.callFunction();
+
+
+        }else{
+            setUp(nextMovNum);
+        }
+    }
+
     public void hintButtonConfirm(){
         if(hintText1.getText() == "" && GameStatus.user.getPoint() >= hintPoint1){
             hintBtn1.setBackground(this.getResources().getDrawable(R.drawable.btn_bg));

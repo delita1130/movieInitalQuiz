@@ -302,4 +302,20 @@ public class GameDao {
         }
     }
 
+    public void updateUser(){
+        if (database != null) {
+            try {
+                ContentValues values = new ContentValues();
+                values.put("done_mov_num",  499);
+                values.put("curr_mov_num", 500);
+
+                database.update("xb_user", values, "1=1", new String[] {});
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
+        GameStatus.user = getUser();
+    }
+
 }

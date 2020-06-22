@@ -21,7 +21,8 @@ public class HintDialog{
         private View.OnClickListener mNegativeListener = null;
 
         private Dialog dlg;
-    public HintDialog(Context context,View.OnClickListener positiveListener, View.OnClickListener negativeListener) {
+
+        public HintDialog(Context context,View.OnClickListener positiveListener, View.OnClickListener negativeListener) {
             this.context = context;
             this.mPositiveListener = positiveListener;
             this.mNegativeListener = negativeListener;
