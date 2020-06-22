@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:ads="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,9 +8,13 @@
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:id="@+id/topLayout"
         android:layout_height="67dp"
         android:background="#ff466e"
-        android:layout_marginBottom="10dp">
+        android:layout_marginBottom="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        >
 
         <TextView
             android:layout_width="wrap_content"
@@ -26,19 +30,26 @@
     <GridView
         android:id="@+id/gridView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="607dp"
+        android:layout_alignTop="@id/topLayout"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="72dp"
+        android:layout_marginBottom="52dp"
+        android:background="#e6f0fa"
         android:gravity="center"
-        android:numColumns="3"
-        android:background="#e6f0fa">
+        android:numColumns="3">
+
     </GridView>
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_marginBottom="3dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
         ads:adSize="BANNER"
         ads:adUnitId="ca-app-pub-3940256099942544/6300978111"></com.google.android.gms.ads.AdView>
 
-</LinearLayout>
+
+</RelativeLayout>

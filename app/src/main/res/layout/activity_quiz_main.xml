@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:background="#e6f0fa">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="67dp"
         android:background="#ff466e">
@@ -15,10 +16,11 @@
             android:id="@+id/backButton"
             android:layout_width="45dp"
             android:layout_height="45dp"
+            android:layout_gravity="center_vertical"
             android:background="#00FFFFFF"
             android:foreground="@drawable/back_button_white_resize"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/stepText"
             app:layout_constraintHorizontal_bias="0.043"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -28,31 +30,64 @@
             android:id="@+id/stepText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="53dp"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
             android:text="단계 4/5"
+            android:textAlignment="center"
             android:textColor="@android:color/white"
             android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/backButton"
-            app:layout_constraintTop_toTopOf="parent" />
+            tools:layout_editor_absoluteX="52dp"
+            tools:layout_editor_absoluteY="21dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal"></LinearLayout>
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="45dp"
             android:layout_height="45dp"
+            android:layout_gravity="center_vertical"
             android:foreground="@drawable/coin_icon_white_resize_point"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.283"
-            app:layout_constraintStart_toEndOf="@+id/stepText"
-            app:layout_constraintTop_toTopOf="parent" />
+            tools:layout_editor_absoluteX="196dp"
+            tools:layout_editor_absoluteY="11dp" />
+
+        <TextView
+            android:id="@+id/pointText"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:layout_gravity="center_vertical"
+            android:text="100"
+            android:textAlignment="viewEnd"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            tools:layout_editor_absoluteX="241dp"
+            tools:layout_editor_absoluteY="21dp" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="포인트"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            tools:layout_editor_absoluteX="311dp"
+            tools:layout_editor_absoluteY="21dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:orientation="horizontal"></LinearLayout>
 
         <ImageButton
             android:id="@+id/imageButton2"
             android:layout_width="45dp"
             android:layout_height="45dp"
+            android:layout_gravity="center_vertical"
             android:background="#00FFFFFF"
             android:foreground="@drawable/charge_icon_white_resize_point"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -62,36 +97,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.416" />
 
-        <TextView
-            android:id="@+id/pointText"
-            android:layout_width="55dp"
-            android:layout_height="24dp"
-            android:text="100"
-            android:textAlignment="viewEnd"
-            android:textColor="@android:color/white"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/textView4"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.511" />
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="포인트"
-            android:textColor="@android:color/white"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.46"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.511" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -144,24 +150,25 @@
         android:clipToPadding="false">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/answer_stroke"
+            android:layout_weight="0.8"
 
+            android:background="@drawable/answer_stroke"
             android:gravity="center_vertical"
             android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#ffffff"
                 android:layout_margin="10dp"
+                android:background="#ffffff"
                 android:gravity="center_vertical"
                 android:orientation="vertical">
 
                 <EditText
                     android:id="@+id/answerEdit"
-                    android:layout_width="254dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
@@ -173,17 +180,18 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="3"
             android:clipToPadding="false"
             android:orientation="horizontal"
-            android:padding="10dp"
-            >
+            android:padding="10dp">
 
             <Button
                 android:id="@+id/confirmBtn"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:background="#ff466e"
                 android:elevation="50dp"
                 android:foreground="@drawable/confirm_icon_white_resize" />
@@ -218,7 +226,7 @@
 
                 <Button
                     android:id="@+id/hintBtn1"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="7dp"
                     android:layout_marginLeft="7dp"
@@ -283,7 +291,7 @@
 
                 <Button
                     android:id="@+id/hintBtn2"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="7dp"
                     android:layout_marginLeft="7dp"
@@ -292,8 +300,8 @@
                     android:layout_marginRight="7dp"
                     android:layout_marginBottom="7dp"
                     android:background="@drawable/btn_bg"
-                    android:foreground="@drawable/actor_icon_white_resize_point"
                     android:elevation="10dp"
+                    android:foreground="@drawable/actor_icon_white_resize_point"
                     android:gravity="center_vertical"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -351,7 +359,7 @@
 
                 <Button
                     android:id="@+id/hintBtn3"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="7dp"
                     android:layout_marginLeft="7dp"
@@ -360,8 +368,8 @@
                     android:layout_marginRight="7dp"
                     android:layout_marginBottom="7dp"
                     android:background="@drawable/btn_bg"
-                    android:foreground="@drawable/picture_icon_white_resize_point"
                     android:elevation="10dp"
+                    android:foreground="@drawable/picture_icon_white_resize_point"
                     android:gravity="center_vertical"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -414,7 +422,7 @@
 
                 <Button
                     android:id="@+id/hintBtn4"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="7dp"
                     android:layout_marginLeft="7dp"
@@ -423,8 +431,8 @@
                     android:layout_marginRight="7dp"
                     android:layout_marginBottom="7dp"
                     android:background="@drawable/btn_bg"
-                    android:foreground="@drawable/movie_icon_white_resize_point"
                     android:elevation="10dp"
+                    android:foreground="@drawable/movie_icon_white_resize_point"
                     android:gravity="center_vertical"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
