@@ -59,7 +59,9 @@ public class QuizMainActivity extends AppCompatActivity {
     final Integer hintPoint2 = new Integer(GameStatus.movActorHintPoint);
     final Integer hintPoint3 = new Integer(GameStatus.movImgHintPoint);
     final Integer hintPoint4 = new Integer(GameStatus.movNameHintPoint);
-
+    private int rewardedAdCount = 0;
+    IncorrectDialog loadingDialog;
+    IncorrectDialog failDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,8 +103,27 @@ public class QuizMainActivity extends AppCompatActivity {
 
                 positiveListener = new View.OnClickListener() {
                     public void onClick(View v) {
-                        readyAd = true;
-                        rewardedAd = createAndLoadRewardedAd();
+
+                        if(rewardedAdCount==0) {
+
+                            readyAd = true;
+
+                            rewardedAdCount++;
+
+                            rewardedAd = createAndLoadRewardedAd();
+
+                            rewardDialog.dismiss();
+
+                            loadingDialog = new IncorrectDialog(QuizMainActivity.this,"광고 로딩 중 입니다.");
+                            loadingDialog.callFunction(answerEdit);
+
+                        }else{
+                            rewardDialog.dismiss();
+                            loadingDialog = new IncorrectDialog(QuizMainActivity.this,"광고 로딩 중 입니다.");
+                            loadingDialog.callFunction(answerEdit);
+
+
+                        }
                     }
                 };
 
@@ -123,56 +144,71 @@ public class QuizMainActivity extends AppCompatActivity {
 
        final RewardedAd rerewardedAd = new RewardedAd(this,
                 "ca-app-pub-3940256099942544/5224354917");
-        RewardedAdLoadCallback adLoadCallback = new RewardedAdLoadCallback() {
-            @Override
-            public void onRewardedAdLoaded() {
-                // Ad successfully loaded.
 
-                if (readyAd == true) {
-                    Log.d("readyAd", "true");
-                    Activity activityContext = activity ;
-                    readyAd = false;
+            RewardedAdLoadCallback adLoadCallback = new RewardedAdLoadCallback() {
+                @Override
+                public void onRewardedAdLoaded() {
+                    // Ad successfully loaded.
 
-                    RewardedAdCallback adCallback = new RewardedAdCallback() {
-                        public void onRewardedAdOpened() {
+                    if (readyAd == true) {
+                        Log.d("readyAd", "true");
+                        Activity activityContext = activity;
+                        RewardedAdCallback adCallback = new RewardedAdCallback() {
+                            public void onRewardedAdOpened() {
 
-                            // Ad opened.
-                        }
+                                // Ad opened.
+                            }
 
-                        public void onRewardedAdClosed() {
-                            rewardDialog.dismiss();
-                            // Ad closed.
-                        }
+                            public void onRewardedAdClosed() {
+                                readyAd = false;
+                                rewardedAdCount = 0;
 
-                        public void onUserEarnedReward(@NonNull RewardItem reward) {
-                            // User earned reward.
+                                rewardDialog.dismiss();
 
-                            gameDao.updatePoint( GameStatus.user.getPoint() + rewardPoint );
+                                if( loadingDialog != null ) {
+                                    loadingDialog.dismiss();
+                                }
 
-                            GameStatus.user= gameDao.getUser();
-                            Integer point = new Integer(GameStatus.user.getPoint());
-                            pointText.setText(point.toString());
+                                // Ad closed.
+                            }
 
-                            hintButtonConfirm();
+                            public void onUserEarnedReward(@NonNull RewardItem reward) {
+                                // User earned reward.
 
-                        }
+                                gameDao.updatePoint(GameStatus.user.getPoint() + rewardPoint);
 
-                        public void onRewardedAdFailedToShow(int errorCode) {
-                            // Ad failed to display
-                        }
-                    };
-                    rewardedAd.show(activityContext, adCallback);
-                } else {
-                    Log.d("TAG", "The rewarded ad wasn't loaded yet.");
+                                GameStatus.user = gameDao.getUser();
+                                Integer point = new Integer(GameStatus.user.getPoint());
+                                pointText.setText(point.toString());
+
+                                hintButtonConfirm();
+
+                            }
+
+                            public void onRewardedAdFailedToShow(int errorCode) {
+                                // Ad failed to display
+                            }
+                        };
+                        rewardedAd.show(activityContext, adCallback);
+                    } else {
+                        Log.d("TAG", "The rewarded ad wasn't loaded yet.");
+                    }
                 }
-            }
 
-            @Override
-            public void onRewardedAdFailedToLoad(int errorCode) {
-                readyAd = true;
-                rewardedAd = createAndLoadRewardedAd();
-            }
-        };
+                @Override
+                public void onRewardedAdFailedToLoad(int errorCode) {
+                    Log.d("TAG", "The rewarded ad failed.");
+                   // readyAd = true;
+                  //  rewardedAd = createAndLoadRewardedAd();
+                    rewardedAdCount = 0;
+
+                    loadingDialog.dismiss();
+
+                    failDialog = new IncorrectDialog(QuizMainActivity.this,"인터넷 연결을 확인해주세요");
+                    failDialog.callFunction(answerEdit);
+                }
+            };
+
         rerewardedAd.loadAd(new AdRequest.Builder().build(), adLoadCallback);
         return rerewardedAd;
     }
@@ -249,7 +285,7 @@ public class QuizMainActivity extends AppCompatActivity {
 
                     }
                 }else{  // 틀렸으면..
-                    IncorrectDialog incorrectDialog = new IncorrectDialog(QuizMainActivity.this);
+                    IncorrectDialog incorrectDialog = new IncorrectDialog(QuizMainActivity.this,"틀렸습니다~!");
                     incorrectDialog.callFunction(answerEdit);
                 }
 

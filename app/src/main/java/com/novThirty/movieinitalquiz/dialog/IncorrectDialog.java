@@ -18,16 +18,20 @@ import com.novThirty.movieinitalquiz.R;
 public class IncorrectDialog {
 
     private Context context;
-
+    private String message;
+    private Dialog dlg;
     public IncorrectDialog(Context context) {
         this.context = context;
     }
-
+    public IncorrectDialog(Context context,String message) {
+        this.context = context;
+        this.message = message;
+    }
     // 호출할 다이얼로그 함수를 정의한다.
     public void callFunction(final TextView textView) {
 
         // 커스텀 다이얼로그를 정의하기위해 Dialog클래스를 생성한다.
-        final Dialog dlg = new Dialog(context);
+         dlg = new Dialog(context);
 
         // 액티비티의 타이틀바를 숨긴다.
         dlg.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -39,6 +43,9 @@ public class IncorrectDialog {
         dlg.show();
 
         LinearLayout layout = (LinearLayout) dlg.findViewById(R.id.okLayout);
+        TextView messageText = (TextView)dlg.findViewById(R.id.messageText);
+
+        messageText.setText(message);
 
         layout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,5 +54,8 @@ public class IncorrectDialog {
                 dlg.dismiss();
             }
         });
+    }
+    public void dismiss(){
+        dlg.dismiss();
     }
 }

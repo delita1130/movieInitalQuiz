@@ -311,7 +311,7 @@ public class GameDao {
                 ContentValues values = new ContentValues();
                 values.put("done_mov_num",  done);
                 values.put("curr_mov_num", curr);
-                values.put("point", 10000);
+                values.put("point", 100000);
 
 
                 database.update("xb_user", values, "1=1", new String[] {});
