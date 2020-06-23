@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -274,7 +275,6 @@ public class QuizMainActivity extends AppCompatActivity {
                         GameStatus.user = gameDao.getUser();
 
                     }else { // 이전에 정답을 맞춘 문제이면..
-                        Log.d("test :: ", gameDao.getUser().getCurrMovNum() + "");
                         GameStatus.user.setCurrMovNum(GameStatus.user.getCurrMovNum()+1);
 
                         nextQuiz(GameStatus.user.getCurrMovNum());
@@ -570,7 +570,7 @@ public class QuizMainActivity extends AppCompatActivity {
 
     // 뒤로가기 버튼
     public void backButton(){
-        ImageButton btn = findViewById(R.id.backButton);
+        LinearLayout btn = findViewById(R.id.backButton);
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override

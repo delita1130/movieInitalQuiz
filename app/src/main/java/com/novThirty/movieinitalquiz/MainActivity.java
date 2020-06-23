@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
      }
 
     private void loadStageList() {
-        //gameDao.updateUser(); // dummy
+        gameDao.updateUser(); // dummy
         // get User
         User getUser = GameStatus.user;
         GameStatus.user = getUser;
@@ -91,7 +91,6 @@ public class MainActivity extends AppCompatActivity {
         StageAdapter adapter = new StageAdapter(this, movieList);
         gridView = findViewById(R.id.gridView);
         gridView.setAdapter(adapter);
-
 
         int index = GameStatus.user.getCurrMovNum() / GameStatus.numOfstepPerStage;
         Log.d("test :: ", GameStatus.user.getCurrMovNum() + ", " + GameStatus.numOfstepPerStage);

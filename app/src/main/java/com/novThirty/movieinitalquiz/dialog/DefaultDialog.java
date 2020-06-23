@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -48,10 +49,21 @@ public class DefaultDialog {
         Button okButton = dlg.findViewById(R.id.okButton);
 
         okButton.setOnClickListener(mPositiveListener);
+
+        dlg.setCancelable(false);
+
+        // 다이얼로그 종료 후 처리
+        /*dlg.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+
+            }
+        });*/
     }
 
     public void dismiss(){
         dlg.dismiss();
+        ((QuizMainActivity) context).finish();
     }
 
 }

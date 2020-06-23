@@ -62,7 +62,7 @@
             </Button>
             <Button
                 android:id="@+id/CancelButton"
-                android:layout_width="150dp"
+                android:layout_width="152dp"
                 android:layout_height="60dp"
                 android:background="@drawable/dialog_bg"
                 android:text="취소">

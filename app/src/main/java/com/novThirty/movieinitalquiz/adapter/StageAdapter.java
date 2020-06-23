@@ -67,10 +67,13 @@ public class StageAdapter extends BaseAdapter {
 
         // 완료 번호가 문제의 번호보다 크거나 같으면 stage을 열어 둔다.
         // 첫번째 stage는 무조건 연다. 처음 시작하면 완료번호가 0이기 때문에 열어 둔다.
-        //5(완료번호) + 1 >= 6(현재번호)
-        final boolean flag = GameStatus.user.getDoneMovNum()+1 >= mItemList.get(i).getMovNum();
+        //5(완료번호) + 1 >= 6(현재 메소드가 읽고 있는 번호)
+        final boolean openFlag = GameStatus.user.getDoneMovNum()+1 >= mItemList.get(i).getMovNum();
+        final boolean playingFlag = Math.floor(GameStatus.user.getDoneMovNum() / 5) + 1 == (mItemList.get(i).getMovNum() / 5) + 1;
 
-        if(flag) {
+        if(playingFlag){
+            mHolder.item.setImageResource(R.drawable.ic_playing_stage);
+        }else if(openFlag) {
             mHolder.item.setImageResource(R.drawable.ic_open_stage3);
         }else {
             mHolder.item.setImageResource(R.drawable.ic_lock_stage3);
@@ -79,7 +82,7 @@ public class StageAdapter extends BaseAdapter {
         mHolder.item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            if(flag) {
+            if(openFlag) {
                 Intent intent = new Intent(mContext, QuizMainActivity.class);
                 intent.putExtra("clickStage", mItemList.get(i).getStage());
                 intent.putExtra("clickFirstMovNum", mItemList.get(i).getMovNum() +  "");
