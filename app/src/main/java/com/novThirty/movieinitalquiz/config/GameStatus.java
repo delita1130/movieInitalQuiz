@@ -13,4 +13,6 @@ public class GameStatus {
 
     public static int movAnswerPoint = 10;
     public static int movRewardPoint = 1500;
+
+    public static int mainScrollPosition = 0;
 }

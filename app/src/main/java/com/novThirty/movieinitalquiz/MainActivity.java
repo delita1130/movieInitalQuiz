@@ -91,6 +91,12 @@ public class MainActivity extends AppCompatActivity {
         StageAdapter adapter = new StageAdapter(this, movieList);
         gridView = findViewById(R.id.gridView);
         gridView.setAdapter(adapter);
+
+
+        int index = GameStatus.user.getCurrMovNum() / GameStatus.numOfstepPerStage;
+        Log.d("test :: ", GameStatus.user.getCurrMovNum() + ", " + GameStatus.numOfstepPerStage);
+        Log.d("test :: 인덱스 ", index + "");
+        gridView.setSelection(index - 5);
     }
 
 }

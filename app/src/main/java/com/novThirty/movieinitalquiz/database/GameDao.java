@@ -303,11 +303,16 @@ public class GameDao {
     }
 
     public void updateUser(){
+        int done = 155;
+        int curr = done + 1;
+
         if (database != null) {
             try {
                 ContentValues values = new ContentValues();
-                values.put("done_mov_num",  499);
-                values.put("curr_mov_num", 500);
+                values.put("done_mov_num",  done);
+                values.put("curr_mov_num", curr);
+                values.put("point", 10000);
+
 
                 database.update("xb_user", values, "1=1", new String[] {});
             }catch (Exception e){
