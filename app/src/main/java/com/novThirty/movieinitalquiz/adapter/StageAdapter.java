@@ -22,7 +22,7 @@ public class StageAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
     private ViewHolder mHolder;
 
-    
+
     private class ViewHolder {
         ImageButton item;
     }
