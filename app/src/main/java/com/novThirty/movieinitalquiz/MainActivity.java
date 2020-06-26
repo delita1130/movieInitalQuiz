@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
      }
 
     private void loadStageList() {
-        gameDao.updateUser(); // dummy
+        //gameDao.updateUser(); // dummy
         // get User
         User getUser = GameStatus.user;
         GameStatus.user = getUser;
