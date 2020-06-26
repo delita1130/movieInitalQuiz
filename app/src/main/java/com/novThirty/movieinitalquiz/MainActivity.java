@@ -1,11 +1,7 @@
 package com.novThirty.movieinitalquiz;
 
-import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.google.android.gms.ads.AdRequest;
@@ -80,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
      }
 
     private void loadStageList() {
-       // gameDao.updateUser(); // dummy
+        gameDao.updateUser(); // dummy
         // get User
         User getUser = GameStatus.user;
         GameStatus.user = getUser;

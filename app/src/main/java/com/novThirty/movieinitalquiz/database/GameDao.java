@@ -303,7 +303,7 @@ public class GameDao {
     }
 
     public void updateUser(){
-        int done = 337;
+        int done = 0;
         int curr = done + 1;
 
         if (database != null) {
