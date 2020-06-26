@@ -72,9 +72,9 @@ public class StageAdapter extends BaseAdapter {
         final boolean playingFlag = Math.floor(GameStatus.user.getDoneMovNum() / 5) + 1 == (mItemList.get(i).getMovNum() / 5) + 1;
 
         if(playingFlag){
-            mHolder.item.setImageResource(R.drawable.ic_playing_stage);
+            mHolder.item.setImageResource(R.drawable.ic_playing_stage2);
         }else if(openFlag) {
-            mHolder.item.setImageResource(R.drawable.ic_open_stage3);
+            mHolder.item.setImageResource(R.drawable.ic_open_stage8);
         }else {
             mHolder.item.setImageResource(R.drawable.ic_lock_stage3);
         }

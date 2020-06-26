@@ -11,8 +11,8 @@ public class GameStatus {
     public static int movImgHintPoint = 250;
     public static int movNameHintPoint = 500;
 
-    public static int movAnswerPoint = 10;
-    public static int movRewardPoint = 1500;
+    public static int movAnswerPoint = 50;
+    public static int movRewardPoint = 150;
 
     public static int mainScrollPosition = 0;
 }
