@@ -144,7 +144,7 @@ public class QuizMainActivity extends AppCompatActivity {
     public RewardedAd createAndLoadRewardedAd() {
 
        final RewardedAd rerewardedAd = new RewardedAd(this,
-                "ca-app-pub-3940256099942544/5224354917");
+                "ca-app-pub-2016735761572848/2448282052");
 
             RewardedAdLoadCallback adLoadCallback = new RewardedAdLoadCallback() {
                 @Override
